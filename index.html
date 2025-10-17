@@ -3,281 +3,410 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Archnanjali Associates - Electronics, Hardware & Marriage Hall</title>
+    <title>Archnanjali Associates - Premium Electronics, Hardware & Events</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
+        /* --- Base & Typography --- */
+        :root {
+            --color-primary: #2563eb; /* Blue */
+            --color-secondary: #f97316; /* Orange */
+            --color-accent: #16a34a; /* Green */
+            --color-dark: #1f2937;
+            --color-light-gray: #f9fafb;
+        }
         body {
             font-family: 'Inter', sans-serif;
+            background-color: var(--color-light-gray);
+            color: #374151;
         }
         .playfair {
             font-family: 'Playfair Display', serif;
         }
+        
+        /* --- Header --- */
+        .header-scrolled {
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        /* --- Hero Section --- */
         .hero-bg {
             background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://i.postimg.cc/zvC0XB6y/archnanjali-town-mall-madhubani-city-madhubani-home-appliance-dealers-bajaj-jw9gfjmg7f.jpg');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed; /* Parallax Effect */
         }
-        .product-card, .gallery-item-container {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+        /* --- Card & Interactive Elements --- */
+        .product-card, .testimonial-card, .offer-card {
+            transition: transform 0.3s ease, box-shadow 0.4s ease;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
         }
-        .product-card:hover, .gallery-item-container:hover {
-            transform: translateY(-10px);
+        .product-card:hover, .testimonial-card:hover, .offer-card:hover {
+            transform: translateY(-8px) scale(1.02);
             box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
         }
-        .gallery-trigger {
-            cursor: pointer;
+        .gallery-trigger { cursor: pointer; }
+
+        /* --- Scroll Animations --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
-        .gemini-modal {
-            transition: opacity 0.3s ease;
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
+
+        /* --- Back to Top & CTA Pulse --- */
+        #back-to-top {
+            position: fixed; bottom: 20px; right: 20px;
+            opacity: 0; visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            z-index: 100;
+        }
+        #back-to-top.show { opacity: 1; visibility: visible; }
+        .pulse-anim { animation: pulse 2s infinite; }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* --- FAQ Accordion --- */
+        .faq-question { cursor: pointer; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out; }
+
+        /* --- Loader --- */
         .loader {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #3498db;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            border: 4px solid #f3f3f3; border-top: 4px solid var(--color-primary);
+            border-radius: 50%; width: 40px; height: 40px;
             animation: spin 1s linear infinite;
         }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="antialiased">
 
     <!-- Header -->
-    <header class="bg-white shadow-md sticky top-0 z-50">
+    <header id="header" class="bg-white shadow-md sticky top-0 z-50 transition-colors duration-300">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="text-2xl font-bold text-gray-800 playfair">Archnanjali Associates</a>
-            <div class="hidden md:flex space-x-6">
-                <a href="#about" class="text-gray-600 hover:text-blue-600 transition duration-300">About Us</a>
-                <a href="#services" class="text-gray-600 hover:text-blue-600 transition duration-300">Our Businesses</a>
-                <a href="#contact" class="text-gray-600 hover:text-blue-600 transition duration-300">Contact</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="text-gray-600 hover:text-blue-600 font-medium transition duration-300">About</a>
+                <a href="#services" class="text-gray-600 hover:text-blue-600 font-medium transition duration-300">Services</a>
+                <a href="#offers" class="text-gray-600 hover:text-blue-600 font-medium transition duration-300">Offers</a>
+                <a href="#testimonials" class="text-gray-600 hover:text-blue-600 font-medium transition duration-300">Testimonials</a>
+                <a href="#faq" class="text-gray-600 hover:text-blue-600 font-medium transition duration-300">FAQ</a>
+                <a href="#contact" class="text-gray-600 hover:text-blue-600 font-medium transition duration-300">Contact</a>
             </div>
             <button id="mobile-menu-button" class="md:hidden flex items-center">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
             </button>
         </nav>
-        <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden px-6 pt-2 pb-4">
-            <a href="#about" class="block py-2 text-gray-600 hover:text-blue-600">About Us</a>
-            <a href="#services" class="block py-2 text-gray-600 hover:text-blue-600">Our Businesses</a>
+            <a href="#about" class="block py-2 text-gray-600 hover:text-blue-600">About</a>
+            <a href="#services" class="block py-2 text-gray-600 hover:text-blue-600">Services</a>
+            <a href="#offers" class="block py-2 text-gray-600 hover:text-blue-600">Offers</a>
+            <a href="#testimonials" class="block py-2 text-gray-600 hover:text-blue-600">Testimonials</a>
+            <a href="#faq" class="block py-2 text-gray-600 hover:text-blue-600">FAQ</a>
             <a href="#contact" class="block py-2 text-gray-600 hover:text-blue-600">Contact</a>
         </div>
     </header>
 
-    <!-- Main Content -->
     <main>
-        <!-- ... existing hero and about sections ... -->
+        <!-- Hero Section -->
         <section class="hero-bg text-white">
-            <div class="container mx-auto px-6 py-32 text-center">
-                <h1 class="text-4xl md:text-6xl font-bold playfair mb-4">Welcome to Archnanjali Associates</h1>
-                <p class="text-lg md:text-2xl uppercase tracking-widest">Customer Satisfaction Is Our Business</p>
-                <a href="#services" class="mt-8 inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition duration-300 text-lg">Explore Our Services</a>
+            <div class="container mx-auto px-6 py-40 text-center flex flex-col items-center">
+                <h1 class="text-5xl md:text-7xl font-bold playfair mb-4 reveal">Welcome to Archnanjali Associates</h1>
+                <p class="text-xl md:text-2xl uppercase tracking-widest reveal" style="transition-delay: 200ms;">Customer Satisfaction Is Our Business</p>
+                <a href="#services" class="mt-10 inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-lg transition-transform duration-300 hover:scale-105 text-lg reveal pulse-anim" style="transition-delay: 400ms;">Explore Our Services</a>
             </div>
         </section>
 
-        <section id="about" class="py-20 bg-white">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 playfair mb-6">About Us</h2>
+        <!-- About Section -->
+        <section id="about" class="py-24 bg-white">
+            <div class="container mx-auto px-6 text-center reveal">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 playfair mb-8">About Us</h2>
                 <div class="max-w-3xl mx-auto">
-                    <p class="text-gray-600 text-lg leading-relaxed mb-4">Since being established in 2018, ARCHANJALI ASSOCIATES has been known for an unparalleled commitment to customer satisfaction. It’s this standard of excellence that has provided the impetus for us to grow into the business we are today.</p>
-                    <p class="text-gray-600 text-lg leading-relaxed">We believe that the customer always comes first - and that means exceptional products and exceptional services. Get in touch today to learn more about what we have to offer.</p>
+                    <p class="text-lg text-gray-600 leading-relaxed mb-4">Since 2018, ARCHANJALI ASSOCIATES has built a reputation for an unparalleled commitment to customer satisfaction. This standard of excellence is the foundation of our growth and the core of our business today.</p>
+                    <p class="text-lg text-gray-600 leading-relaxed">We believe the customer always comes first, which means providing exceptional products and services. Get in touch to discover what we have to offer.</p>
                 </div>
             </div>
         </section>
-
+        
         <!-- Our Businesses Section -->
-        <section id="services" class="py-20 bg-gray-50">
+        <section id="services" class="py-24 bg-gray-50">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center playfair mb-16">Our Businesses</h2>
-                
-                <div class="space-y-24">
-                    <!-- Electronics Mall Section -->
-                    <div>
-                        <div class="text-center mb-8">
-                            <h3 class="text-3xl font-bold text-gray-800 playfair inline-block">Electronics Mall</h3>
-                            <button id="open-electronics-ai" class="ml-4 inline-flex items-center bg-blue-100 text-blue-800 font-semibold py-2 px-4 rounded-full text-sm hover:bg-blue-200 transition">
-                                Help Me Choose ✨
-                            </button>
+                <div class="text-center mb-20 reveal">
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-800 playfair">Our Businesses</h2>
+                    <p class="text-lg text-gray-500 mt-4 max-w-2xl mx-auto">Three dedicated services, one standard of quality.</p>
+                </div>
+                <div class="space-y-28">
+                    <!-- Electronics Mall -->
+                    <div class="reveal">
+                        <div class="text-center mb-12">
+                            <h3 class="text-4xl font-bold text-gray-800 playfair inline-block">Electronics Mall</h3>
+                            <button id="open-electronics-ai" class="ml-4 inline-flex items-center bg-blue-100 text-blue-800 font-semibold py-2 px-4 rounded-full text-sm hover:bg-blue-200 transition">Help Me Choose ✨</button>
                         </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                            <!-- New Product List -->
-                            <div class="bg-white rounded-lg shadow-lg overflow-hidden product-card text-center">
-                                <img src="https://placehold.co/600x600/3b82f6/ffffff?text=Fridge+1" alt="Refrigerator" class="w-full h-56 object-cover gallery-trigger" data-images="https://placehold.co/800x600/3b82f6/ffffff?text=Fridge+Front,https://placehold.co/800x600/3b82f6/eeeeee?text=Fridge+Open,https://placehold.co/800x600/3b82f6/dddddd?text=Fridge+Side">
+                        <!-- Live Search Bar -->
+                        <div class="max-w-2xl mx-auto mb-12">
+                            <input type="text" id="product-search" placeholder="🔍 Search for electronics..." class="w-full px-5 py-3 rounded-full border-2 border-gray-200 focus:outline-none focus:border-blue-500 transition">
+                        </div>
+                        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                             <div class="product-item bg-white rounded-lg shadow-lg overflow-hidden product-card text-center" data-name="smart refrigerator samsung">
+                                <img src="https://placehold.co/600x600/3b82f6/ffffff?text=Fridge" alt="Refrigerator" class="w-full h-56 object-cover gallery-trigger" data-images="https://placehold.co/800x600/3b82f6/ffffff?text=Fridge+Front,https://placehold.co/800x600/3b82f6/eeeeee?text=Fridge+Open">
                                 <div class="p-6">
-                                    <h4 class="text-lg font-bold">Smart Refrigerator</h4>
+                                    <h4 class="text-xl font-bold">Smart Refrigerator</h4>
                                     <p class="text-sm text-gray-500">by Samsung</p>
-                                    <p class="text-xl font-bold text-blue-600 mt-2">₹65,000</p>
+                                    <p class="text-2xl font-bold text-blue-600 mt-2">₹65,000</p>
                                 </div>
                             </div>
-                            <div class="bg-white rounded-lg shadow-lg overflow-hidden product-card text-center">
-                                <img src="https://placehold.co/600x600/3b82f6/ffffff?text=Washing+Machine" alt="Washing Machine" class="w-full h-56 object-cover gallery-trigger" data-images="https://placehold.co/800x600/3b82f6/ffffff?text=Machine+Front,https://placehold.co/800x600/3b82f6/eeeeee?text=Machine+Top">
+                            <div class="product-item bg-white rounded-lg shadow-lg overflow-hidden product-card text-center" data-name="front load washer lg washing machine">
+                                <img src="https://placehold.co/600x600/3b82f6/ffffff?text=Washer" alt="Washing Machine" class="w-full h-56 object-cover gallery-trigger" data-images="https://placehold.co/800x600/3b82f6/ffffff?text=Machine+Front,https://placehold.co/800x600/3b82f6/eeeeee?text=Machine+Top">
                                 <div class="p-6">
-                                    <h4 class="text-lg font-bold">Front Load Washer</h4>
+                                    <h4 class="text-xl font-bold">Front Load Washer</h4>
                                     <p class="text-sm text-gray-500">by LG</p>
-                                    <p class="text-xl font-bold text-blue-600 mt-2">₹34,500</p>
+                                    <p class="text-2xl font-bold text-blue-600 mt-2">₹34,500</p>
                                 </div>
                             </div>
-                            <div class="bg-white rounded-lg shadow-lg overflow-hidden product-card text-center">
-                               <img src="https://placehold.co/600x600/3b82f6/ffffff?text=Bluetooth+Speaker" alt="Bluetooth Speaker" class="w-full h-56 object-cover gallery-trigger" data-images="https://placehold.co/800x600/3b82f6/ffffff?text=Speaker+View+1,https://placehold.co/800x600/3b82f6/eeeeee?text=Speaker+View+2">
+                            <div class="product-item bg-white rounded-lg shadow-lg overflow-hidden product-card text-center" data-name="bluetooth speaker sony">
+                               <img src="https://placehold.co/600x600/3b82f6/ffffff?text=Speaker" alt="Bluetooth Speaker" class="w-full h-56 object-cover gallery-trigger" data-images="https://placehold.co/800x600/3b82f6/ffffff?text=Speaker+View+1,https://placehold.co/800x600/3b82f6/eeeeee?text=Speaker+View+2">
                                 <div class="p-6">
-                                    <h4 class="text-lg font-bold">Bluetooth Speaker</h4>
+                                    <h4 class="text-xl font-bold">Bluetooth Speaker</h4>
                                      <p class="text-sm text-gray-500">by Sony</p>
-                                    <p class="text-xl font-bold text-blue-600 mt-2">₹8,999</p>
+                                    <p class="text-2xl font-bold text-blue-600 mt-2">₹8,999</p>
                                 </div>
                             </div>
-                            <div class="bg-white rounded-lg shadow-lg overflow-hidden product-card text-center">
-                                <img src="https://placehold.co/600x600/3b82f6/ffffff?text=Laptop" alt="Laptop" class="w-full h-56 object-cover gallery-trigger" data-images="https://placehold.co/800x600/3b82f6/ffffff?text=Laptop+Front,https://placehold.co/800x600/3b82f6/eeeeee?text=Laptop+Keyboard,https://placehold.co/800x600/3b82f6/dddddd?text=Laptop+Side">
+                            <div class="product-item bg-white rounded-lg shadow-lg overflow-hidden product-card text-center" data-name="gaming laptop dell">
+                                <img src="https://placehold.co/600x600/3b82f6/ffffff?text=Laptop" alt="Laptop" class="w-full h-56 object-cover gallery-trigger" data-images="https://placehold.co/800x600/3b82f6/ffffff?text=Laptop+Front,https://placehold.co/800x600/3b82f6/eeeeee?text=Laptop+Keyboard">
                                 <div class="p-6">
-                                    <h4 class="text-lg font-bold">Gaming Laptop</h4>
+                                    <h4 class="text-xl font-bold">Gaming Laptop</h4>
                                     <p class="text-sm text-gray-500">by Dell</p>
-                                    <p class="text-xl font-bold text-blue-600 mt-2">₹72,000</p>
-                                </div>
-                            </div>
-                             <div class="bg-white rounded-lg shadow-lg overflow-hidden product-card text-center">
-                                <img src="https://placehold.co/600x600/3b82f6/ffffff?text=4K+Smart+TV" alt="4K Smart TV" class="w-full h-56 object-cover gallery-trigger" data-images="https://placehold.co/800x600/3b82f6/ffffff?text=TV+Front,https://placehold.co/800x600/3b82f6/eeeeee?text=TV+Remote">
-                                <div class="p-6">
-                                    <h4 class="text-lg font-bold">55" 4K Smart TV</h4>
-                                    <p class="text-sm text-gray-500">by VU</p>
-                                    <p class="text-xl font-bold text-blue-600 mt-2">₹38,500</p>
-                                </div>
-                            </div>
-                            <div class="bg-white rounded-lg shadow-lg overflow-hidden product-card text-center">
-                                <img src="https://placehold.co/600x600/3b82f6/ffffff?text=Air+Conditioner" alt="Air Conditioner" class="w-full h-56 object-cover gallery-trigger" data-images="https://placehold.co/800x600/3b82f6/ffffff?text=AC+Unit,https://placehold.co/800x600/3b82f6/eeeeee?text=AC+Outdoor">
-                                <div class="p-6">
-                                    <h4 class="text-lg font-bold">1.5 Ton Split AC</h4>
-                                    <p class="text-sm text-gray-500">by Voltas</p>
-                                    <p class="text-xl font-bold text-blue-600 mt-2">₹35,500</p>
-                                </div>
-                            </div>
-                            <div class="bg-white rounded-lg shadow-lg overflow-hidden product-card text-center">
-                                <img src="https://placehold.co/600x600/3b82f6/ffffff?text=Printer" alt="Printer" class="w-full h-56 object-cover gallery-trigger" data-images="https://placehold.co/800x600/3b82f6/ffffff?text=Printer+Front">
-                                <div class="p-6">
-                                    <h4 class="text-lg font-bold">All-in-One Printer</h4>
-                                    <p class="text-sm text-gray-500">by HP</p>
-                                    <p class="text-xl font-bold text-blue-600 mt-2">₹12,200</p>
-                                </div>
-                            </div>
-                             <div class="bg-white rounded-lg shadow-lg overflow-hidden product-card text-center">
-                                <img src="https://placehold.co/600x600/3b82f6/ffffff?text=Inverter" alt="Inverter" class="w-full h-56 object-cover gallery-trigger" data-images="https://placehold.co/800x600/3b82f6/ffffff?text=Inverter+Unit,https://placehold.co/800x600/3b82f6/eeeeee?text=Inverter+Battery">
-                                <div class="p-6">
-                                    <h4 class="text-lg font-bold">Home Inverter+Battery</h4>
-                                    <p class="text-sm text-gray-500">by Luminous</p>
-                                    <p class="text-xl font-bold text-blue-600 mt-2">₹15,000</p>
+                                    <p class="text-2xl font-bold text-blue-600 mt-2">₹72,000</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Hardware Supplies Section -->
-                    <div>
-                        <div class="text-center mb-8">
-                            <h3 class="text-3xl font-bold text-gray-800 playfair inline-block">Hardware Supplies</h3>
-                             <button id="open-hardware-ai" class="ml-4 inline-flex items-center bg-green-100 text-green-800 font-semibold py-2 px-4 rounded-full text-sm hover:bg-green-200 transition">
-                                Project Estimator ✨
-                            </button>
+                    
+                    <!-- Hardware Supplies -->
+                    <div class="reveal">
+                        <div class="text-center mb-12">
+                            <h3 class="text-4xl font-bold text-gray-800 playfair inline-block">Hardware Supplies</h3>
+                            <button id="open-hardware-ai" class="ml-4 inline-flex items-center bg-green-100 text-green-800 font-semibold py-2 px-4 rounded-full text-sm hover:bg-green-200 transition">Project Estimator ✨</button>
                         </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                            <!-- Hardware Items -->
-                             <div class="bg-white rounded-lg shadow-lg overflow-hidden product-card text-center">
-                                <img src="https://placehold.co/600x500/84cc16/ffffff?text=Cement+Bags" alt="Cement" class="w-full h-56 object-cover gallery-trigger" data-images="https://placehold.co/800x600/84cc16/ffffff?text=Cement+Stack">
+                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                            <div class="bg-white rounded-lg shadow-lg overflow-hidden product-card text-center">
+                                <img src="https://placehold.co/600x500/16a34a/ffffff?text=Cement" alt="Cement" class="w-full h-56 object-cover gallery-trigger" data-images="https://placehold.co/800x600/16a34a/ffffff?text=Cement+Stack">
                                 <div class="p-6">
-                                    <h4 class="text-lg font-bold">Premium Cement</h4>
-                                    <p class="text-xl font-bold text-green-600 mt-2">₹450 / Bag</p>
-                                </div>
-                            </div>
-                             <div class="bg-white rounded-lg shadow-lg overflow-hidden product-card text-center">
-                                <img src="https://placehold.co/600x500/84cc16/ffffff?text=Iron+Rods" alt="Iron Rods" class="w-full h-56 object-cover gallery-trigger" data-images="https://placehold.co/800x600/84cc16/ffffff?text=Rods+Bundle,https://placehold.co/800x600/84cc16/eeeeee?text=Rods+Close-up">
-                                <div class="p-6">
-                                    <h4 class="text-lg font-bold">TMT Iron Rods</h4>
-                                    <p class="text-xl font-bold text-green-600 mt-2">Contact for Price</p>
-                                </div>
-                            </div>
-                             <div class="bg-white rounded-lg shadow-lg overflow-hidden product-card text-center">
-                                <img src="https://placehold.co/600x500/84cc16/ffffff?text=Sand" alt="Sand" class="w-full h-56 object-cover gallery-trigger" data-images="https://placehold.co/800x600/84cc16/ffffff?text=Sand+Pile">
-                                <div class="p-6">
-                                    <h4 class="text-lg font-bold">Fine Construction Sand</h4>
-                                    <p class="text-xl font-bold text-green-600 mt-2">Best Market Rate</p>
+                                    <h4 class="text-xl font-bold">Premium Cement</h4>
+                                    <p class="text-sm text-gray-500">OPC & PPC Grade</p>
+                                    <p class="text-2xl font-bold text-green-600 mt-2">₹450 / Bag</p>
                                 </div>
                             </div>
                             <div class="bg-white rounded-lg shadow-lg overflow-hidden product-card text-center">
-                                <img src="https://placehold.co/600x500/84cc16/ffffff?text=Concrete+Mixer" alt="Concrete" class="w-full h-56 object-cover gallery-trigger" data-images="https://placehold.co/800x600/84cc16/ffffff?text=Concrete+Mixer,https://placehold.co/800x600/84cc16/eeeeee?text=Concrete+Pour">
+                                <img src="https://placehold.co/600x500/16a34a/ffffff?text=Iron+Rods" alt="Iron Rods" class="w-full h-56 object-cover gallery-trigger" data-images="https://placehold.co/800x600/16a34a/ffffff?text=Rods+Bundle,https://placehold.co/800x600/16a34a/eeeeee?text=Rods+Close-up">
                                 <div class="p-6">
-                                    <h4 class="text-lg font-bold">Ready-Mix Concrete</h4>
-                                    <p class="text-xl font-bold text-green-600 mt-2">Per Cubic Meter</p>
+                                    <h4 class="text-xl font-bold">TMT Iron Rods</h4>
+                                    <p class="text-sm text-gray-500">All Gauges Available</p>
+                                    <p class="text-2xl font-bold text-green-600 mt-2">Market Price</p>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-lg shadow-lg overflow-hidden product-card text-center">
+                                <img src="https://placehold.co/600x500/16a34a/ffffff?text=Sand" alt="Sand" class="w-full h-56 object-cover gallery-trigger" data-images="https://placehold.co/800x600/16a34a/ffffff?text=Sand+Pile">
+                                <div class="p-6">
+                                    <h4 class="text-xl font-bold">Construction Sand</h4>
+                                    <p class="text-sm text-gray-500">Fine & Coarse</p>
+                                    <p class="text-2xl font-bold text-green-600 mt-2">Best Rate</p>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-lg shadow-lg overflow-hidden product-card text-center">
+                                <img src="https://placehold.co/600x500/16a34a/ffffff?text=Concrete" alt="Concrete" class="w-full h-56 object-cover gallery-trigger" data-images="https://placehold.co/800x600/16a34a/ffffff?text=Concrete+Mixer">
+                                <div class="p-6">
+                                    <h4 class="text-xl font-bold">Ready-Mix Concrete</h4>
+                                    <p class="text-sm text-gray-500">Per Cubic Meter</p>
+                                    <p class="text-2xl font-bold text-green-600 mt-2">Quote on Request</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Marriage Hall Section -->
-                    <div>
-                         <div class="text-center mb-8">
-                            <h3 class="text-3xl font-bold text-gray-800 playfair inline-block">Marriage & Event Hall</h3>
-                            <button id="open-events-ai" class="ml-4 inline-flex items-center bg-orange-100 text-orange-800 font-semibold py-2 px-4 rounded-full text-sm hover:bg-orange-200 transition">
-                                Event Planner AI ✨
-                            </button>
+                    
+                    <!-- Marriage Hall -->
+                    <div class="reveal">
+                        <div class="text-center mb-12">
+                            <h3 class="text-4xl font-bold text-gray-800 playfair inline-block">Marriage & Event Hall</h3>
+                            <button id="open-events-ai" class="ml-4 inline-flex items-center bg-orange-100 text-orange-800 font-semibold py-2 px-4 rounded-full text-sm hover:bg-orange-200 transition">Event Planner AI ✨</button>
                         </div>
-                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
-                             <div class="bg-white rounded-lg shadow-lg overflow-hidden gallery-item-container">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                            <div class="bg-white rounded-lg shadow-lg overflow-hidden product-card">
                                 <img src="https://placehold.co/600x500/f97316/ffffff?text=Main+Hall" alt="Main Hall" class="w-full h-64 object-cover gallery-trigger" data-images="https://placehold.co/800x600/f97316/ffffff?text=Main+Hall+Wide,https://placehold.co/800x600/f97316/eeeeee?text=Sitting+Arrangement">
-                                <p class="text-center font-semibold p-2 bg-white">Spacious Main Hall</p>
+                                <p class="text-center font-semibold p-3 bg-white text-lg">Spacious Main Hall</p>
                             </div>
-                            <div class="bg-white rounded-lg shadow-lg overflow-hidden gallery-item-container">
+                            <div class="bg-white rounded-lg shadow-lg overflow-hidden product-card">
                                 <img src="https://placehold.co/600x500/f97316/ffffff?text=Dining+Area" alt="Dining Area" class="w-full h-64 object-cover gallery-trigger" data-images="https://placehold.co/800x600/f97316/ffffff?text=Dining+Hall,https://placehold.co/800x600/f97316/eeeeee?text=Buffet+Setup">
-                                <p class="text-center font-semibold p-2 bg-white">Elegant Dining Area</p>
+                                <p class="text-center font-semibold p-3 bg-white text-lg">Elegant Dining Area</p>
                             </div>
-                            <div class="bg-white rounded-lg shadow-lg overflow-hidden gallery-item-container">
-                                <img src="https://placehold.co/600x500/f97316/ffffff?text=Stage+Decoration" alt="Stage Decoration" class="w-full h-64 object-cover gallery-trigger" data-images="https://placehold.co/800x600/f97316/ffffff?text=Wedding+Stage,https://placehold.co/800x600/f97316/eeeeee?text=Reception+Stage">
-                                <p class="text-center font-semibold p-2 bg-white">Custom Stage Decoration</p>
+                            <div class="bg-white rounded-lg shadow-lg overflow-hidden product-card">
+                                <img src="https://placehold.co/600x500/f97316/ffffff?text=Stage" alt="Stage Decoration" class="w-full h-64 object-cover gallery-trigger" data-images="https://placehold.co/800x600/f97316/ffffff?text=Wedding+Stage,https://placehold.co/800x600/f97316/eeeeee?text=Reception+Stage">
+                                <p class="text-center font-semibold p-3 bg-white text-lg">Custom Stage Decoration</p>
                             </div>
-                         </div>
-                         <div class="text-center max-w-2xl mx-auto">
-                            <a href="#contact" class="mt-4 inline-block bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300">Enquire Now</a>
-                         </div>
+                        </div>
+                        <!-- Amenities -->
+                        <div class="bg-white rounded-lg shadow-lg p-8">
+                            <h4 class="text-2xl font-bold text-center mb-8 playfair">Features & Amenities</h4>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                                <div class="flex flex-col items-center"><svg class="w-12 h-12 text-orange-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg><p>Upto 500 Guests</p></div>
+                                <div class="flex flex-col items-center"><svg class="w-12 h-12 text-orange-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><p>Full Day Booking</p></div>
+                                <div class="flex flex-col items-center"><svg class="w-12 h-12 text-orange-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg><p>Power Backup</p></div>
+                                <div class="flex flex-col items-center"><svg class="w-12 h-12 text-orange-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg><p>Ample Parking</p></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ... existing contact section ... -->
-        <section id="contact" class="py-20 bg-white">
+        <!-- Special Offers Section -->
+        <section id="offers" class="py-24 bg-white">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center playfair mb-12">Get In Touch</h2>
-                <div class="bg-gray-100 rounded-lg shadow-xl p-8 max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
-                    <div>
-                        <h3 class="text-xl font-bold mb-4">Contact Information</h3>
-                        <p class="mb-2"><strong>Proprietor:</strong> Shashikant Jha</p>
-                        <p class="mb-2"><strong>Address:</strong><br>Madhubani - Rajnagar - Babubarhi - Khutauna Rd, Laheriya Ganj, Madhubani, Bihar, India</p>
-                        <p class="mb-2"><strong>Email:</strong> <a href="mailto:archanjaliassociates@gmail.com" class="text-blue-600 hover:underline">archanjaliassociates@gmail.com</a></p>
-                        <p><strong>Phone:</strong> <a href="tel:7007688136" class="text-blue-600 hover:underline">7007688136</a></p>
-                        <h3 class="text-xl font-bold mt-8 mb-4">Opening Hours</h3>
-                        <p><strong>Mon - Sat:</strong> 6am - 10pm</p>
-                        <p><strong>Sun:</strong> 9am - 9pm</p>
+                <div class="text-center mb-20 reveal">
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-800 playfair">Featured Offers</h2>
+                    <p class="text-lg text-gray-500 mt-4 max-w-2xl mx-auto">Don't miss out on our best deals and top products.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden offer-card text-center reveal">
+                        <div class="p-8">
+                            <h4 class="text-2xl font-bold">Smart TV Bonanza</h4>
+                            <p class="text-sm text-gray-500 uppercase tracking-wider my-2">UP TO 30% OFF</p>
+                            <p class="text-gray-600 mb-4">Get the latest 4K Smart TVs from top brands at unbeatable prices. Perfect for movie nights and gaming.</p>
+                            <a href="#services" class="font-bold text-blue-600 hover:underline">Shop TVs</a>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden offer-card text-center reveal" style="transition-delay: 200ms;">
+                         <div class="p-8">
+                            <h4 class="text-2xl font-bold">Bulk Construction Deal</h4>
+                            <p class="text-sm text-gray-500 uppercase tracking-wider my-2">SPECIAL RATES</p>
+                            <p class="text-gray-600 mb-4">Planning a big project? Get special pricing on bulk orders of cement, sand, and iron rods.</p>
+                             <a href="#contact" class="font-bold text-green-600 hover:underline">Request a Quote</a>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden offer-card text-center reveal" style="transition-delay: 400ms;">
+                        <div class="p-8">
+                            <h4 class="text-2xl font-bold">Early Event Booking</h4>
+                            <p class="text-sm text-gray-500 uppercase tracking-wider my-2">15% DISCOUNT</p>
+                            <p class="text-gray-600 mb-4">Book our event hall more than 3 months in advance and receive a 15% discount on the total package.</p>
+                            <a href="#contact" class="font-bold text-orange-600 hover:underline">Enquire Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="py-24 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-20 reveal">
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-800 playfair">What Our Customers Say</h2>
+                     <p class="text-lg text-gray-500 mt-4 max-w-2xl mx-auto">Our commitment to quality, reflected in their words.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-lg shadow-lg testimonial-card reveal">
+                        <p class="text-gray-600 mb-6 italic">"The best electronics store in Madhubani. I got a great deal on my new laptop, and the service was incredibly helpful and professional."</p>
+                        <p class="font-bold text-gray-800">- Rohan Kumar</p><p class="text-sm text-gray-500">Satisfied Customer</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-lg testimonial-card reveal" style="transition-delay: 200ms;">
+                         <p class="text-gray-600 mb-6 italic">"Archnanjali supplied all the materials for our new home. The quality of the iron and cement was top-notch, and delivery was always on time."</p>
+                        <p class="font-bold text-gray-800">- Priya Construction Co.</p><p class="text-sm text-gray-500">Business Client</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-lg testimonial-card reveal" style="transition-delay: 400ms;">
+                         <p class="text-gray-600 mb-6 italic">"We hosted our daughter's wedding here and it was perfect. The hall is beautiful, spacious, and the management was extremely cooperative."</p>
+                        <p class="font-bold text-gray-800">- The Sharma Family</p><p class="text-sm text-gray-500">Event Host</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- FAQ Section -->
+        <section id="faq" class="py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-800 playfair">Frequently Asked Questions</h2>
+                </div>
+                <div class="max-w-3xl mx-auto space-y-4 reveal">
+                    <!-- FAQ Item 1 -->
+                    <div class="faq-item border-b border-gray-200 pb-4">
+                        <div class="faq-question flex justify-between items-center py-4">
+                            <h4 class="text-lg font-semibold">Do you offer home delivery for electronics and hardware?</h4>
+                            <svg class="faq-icon w-6 h-6 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                        </div>
+                        <div class="faq-answer px-4"><p class="text-gray-600">Yes, we offer home delivery for all our products within the local Madhubani area. Delivery charges may apply based on distance and order size. Please contact us for details.</p></div>
+                    </div>
+                    <!-- FAQ Item 2 -->
+                    <div class="faq-item border-b border-gray-200 pb-4">
+                        <div class="faq-question flex justify-between items-center py-4">
+                            <h4 class="text-lg font-semibold">What is the booking process for the marriage hall?</h4>
+                            <svg class="faq-icon w-6 h-6 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                        </div>
+                        <div class="faq-answer px-4"><p class="text-gray-600">To book our hall, please contact us to check for availability on your desired date. A 50% advance payment is required to confirm the booking, with the remaining balance due one week before the event.</p></div>
+                    </div>
+                    <!-- FAQ Item 3 -->
+                    <div class="faq-item border-b border-gray-200 pb-4">
+                        <div class="faq-question flex justify-between items-center py-4">
+                            <h4 class="text-lg font-semibold">Do you provide warranties on electronic items?</h4>
+                            <svg class="faq-icon w-6 h-6 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                        </div>
+                        <div class="faq-answer px-4"><p class="text-gray-600">Absolutely. All electronic products come with the official brand warranty. We are an authorized dealer for all brands we carry, and we will assist you with any warranty claims.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-24 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-800 playfair">Get In Touch</h2>
+                    <p class="text-lg text-gray-500 mt-4">We're here to help. Contact us for quotes, bookings, and inquiries.</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-xl p-8 max-w-5xl mx-auto grid md:grid-cols-2 gap-12 reveal">
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-3 playfair">Contact Information</h3>
+                            <p><strong>Proprietor:</strong> Shashikant Jha</p>
+                            <p><strong>Address:</strong> Madhubani - Rajnagar Rd, Laheriya Ganj, Madhubani, Bihar</p>
+                            <p><strong>Email:</strong> <a href="mailto:archanjaliassociates@gmail.com" class="text-blue-600 hover:underline">archanjaliassociates@gmail.com</a></p>
+                            <p><strong>Phone:</strong> <a href="tel:7007688136" class="text-blue-600 hover:underline">7007688136</a></p>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold mt-6 mb-3 playfair">Opening Hours</h3>
+                            <p><strong>Mon - Sat:</strong> 6:00 AM - 10:00 PM</p>
+                            <p><strong>Sun:</strong> 9:00 AM - 9:00 PM</p>
+                        </div>
                     </div>
                     <div>
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3574.004928157778!2d86.07471881503387!3d26.39097748335553!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39edcb88e63a347d%3A0x68b31a396d18a09b!2sLaheriya%20Ganj%2C%20Madhubani%2C%20Bihar%20847211%2C%20India!5e0!3m2!1sen!2sus!4v1678886400000!5m2!1sen!2sus" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" class="rounded-lg shadow-md" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3574.004928157778!2d86.07471881503387!3d26.39097748335553!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39edcb88e63a347d%3A0x68b31a396d18a09b!2sLaheriya%20Ganj%2C%20Madhubani%2C%20Bihar%20847211%2C%20India!5e0!3m2!1sen!2sus!4v1678886400000!5m2!1sen!2sus" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" class="rounded-lg shadow-md" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-6">
+    <footer class="bg-gray-800 text-white py-8">
         <div class="container mx-auto px-6 text-center">
-            <p>&copy; 2024 Archnanjali Associates. All Rights Reserved.</p>
+            <p>&copy; 2025 Archnanjali Associates. All Rights Reserved. | Designed with Excellence</p>
         </div>
     </footer>
+    
+    <button id="back-to-top" class="bg-blue-600 hover:bg-blue-700 text-white rounded-full p-3 shadow-lg transition-transform duration-300 hover:scale-110">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg>
+    </button>
 
     <!-- Modals -->
-    <!-- Gemini AI Modal -->
-    <div id="gemini-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4 gemini-modal">
+    <div id="gemini-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4">
         <div class="bg-white rounded-lg shadow-2xl p-6 w-full max-w-lg relative">
             <button id="gemini-modal-close" class="absolute top-3 right-3 text-gray-500 hover:text-gray-800">
                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
@@ -295,8 +424,6 @@
             <div id="gemini-result" class="mt-4 p-4 bg-gray-50 rounded-md max-h-64 overflow-y-auto" style="white-space: pre-wrap;"></div>
         </div>
     </div>
-
-    <!-- Image Gallery Modal -->
     <div id="image-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4">
         <div class="bg-white rounded-lg shadow-2xl p-4 w-full max-w-4xl relative">
              <button id="modal-close-button" class="absolute -top-4 -right-4 bg-white rounded-full p-2 z-20 text-gray-800 hover:bg-gray-200">
@@ -315,132 +442,158 @@
     </div>
 
     <script>
-        // --- Mobile menu toggle ---
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuButton.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
-        const mobileMenuLinks = mobileMenu.getElementsByTagName('a');
-        for (let link of mobileMenuLinks) {
-            link.addEventListener('click', () => { mobileMenu.classList.add('hidden'); });
-        }
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Header Scroll Effect ---
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                header.classList.toggle('header-scrolled', window.scrollY > 50);
+            });
 
-        // --- Image Gallery Modal Logic ---
-        const imageModal = document.getElementById('image-modal');
-        const modalImage = document.getElementById('modal-image');
-        const imageModalCloseButton = document.getElementById('modal-close-button');
-        const prevButton = document.getElementById('modal-prev-button');
-        const nextButton = document.getElementById('modal-next-button');
-        let currentImageIndex = 0;
-        let currentImageSet = [];
+            // --- Mobile menu toggle ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+            
+            // --- Scroll Animations ---
+            const revealElements = document.querySelectorAll('.reveal');
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+            revealElements.forEach(el => revealObserver.observe(el));
+            
+            // --- Back to Top Button ---
+            const backToTopButton = document.getElementById('back-to-top');
+            window.addEventListener('scroll', () => {
+                backToTopButton.classList.toggle('show', window.scrollY > 300);
+            });
+            backToTopButton.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
 
-        const updateModalImage = () => {
-            modalImage.src = currentImageSet[currentImageIndex];
-            prevButton.classList.toggle('hidden', currentImageIndex === 0);
-            nextButton.classList.toggle('hidden', currentImageIndex === currentImageSet.length - 1);
-        };
+            // --- Product Search Filter ---
+            const searchInput = document.getElementById('product-search');
+            const productItems = document.querySelectorAll('.product-item');
+            if (searchInput) {
+                searchInput.addEventListener('keyup', () => {
+                    const searchTerm = searchInput.value.toLowerCase();
+                    productItems.forEach(item => {
+                        const itemName = item.getAttribute('data-name').toLowerCase();
+                        if (itemName.includes(searchTerm)) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            }
 
-        document.querySelectorAll('.gallery-trigger').forEach(trigger => {
-            trigger.addEventListener('click', (e) => {
-                const imagesAttr = e.target.getAttribute('data-images');
-                if (imagesAttr) {
-                    currentImageSet = imagesAttr.split(',');
-                } else {
-                    currentImageSet = [e.target.src]; // Fallback for single images
-                }
-                currentImageIndex = 0;
-                updateModalImage();
-                imageModal.classList.remove('hidden');
+            // --- FAQ Accordion ---
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                const answer = item.querySelector('.faq-answer');
+                const icon = item.querySelector('.faq-icon');
+                question.addEventListener('click', () => {
+                    const isOpened = answer.style.maxHeight && answer.style.maxHeight !== '0px';
+                    faqItems.forEach(i => { // Close all others
+                        i.querySelector('.faq-answer').style.maxHeight = '0px';
+                        i.querySelector('.faq-icon').style.transform = 'rotate(0deg)';
+                    });
+                    if (!isOpened) {
+                        answer.style.maxHeight = answer.scrollHeight + 'px';
+                        icon.style.transform = 'rotate(180deg)';
+                    }
+                });
+            });
+
+            // --- Modal Logic ---
+            const imageModal = document.getElementById('image-modal');
+            const modalImage = document.getElementById('modal-image');
+            const imageModalCloseButton = document.getElementById('modal-close-button');
+            const prevButton = document.getElementById('modal-prev-button');
+            const nextButton = document.getElementById('modal-next-button');
+            let currentImageIndex = 0;
+            let currentImageSet = [];
+
+            const updateModalImage = () => {
+                modalImage.src = currentImageSet[currentImageIndex];
+                prevButton.style.display = currentImageIndex === 0 ? 'none' : 'block';
+                nextButton.style.display = currentImageIndex === currentImageSet.length - 1 ? 'none' : 'block';
+            };
+
+            document.querySelectorAll('.gallery-trigger').forEach(trigger => {
+                trigger.addEventListener('click', (e) => {
+                    const imagesAttr = e.target.getAttribute('data-images');
+                    currentImageSet = imagesAttr ? imagesAttr.split(',') : [e.target.src];
+                    currentImageIndex = 0;
+                    updateModalImage();
+                    imageModal.classList.remove('hidden');
+                });
+            });
+
+            prevButton.addEventListener('click', () => { if (currentImageIndex > 0) { currentImageIndex--; updateModalImage(); } });
+            nextButton.addEventListener('click', () => { if (currentImageIndex < currentImageSet.length - 1) { currentImageIndex++; updateModalImage(); } });
+
+            const closeImageModal = () => imageModal.classList.add('hidden');
+            imageModalCloseButton.addEventListener('click', closeImageModal);
+            imageModal.addEventListener('click', (e) => { if (e.target === imageModal) closeImageModal(); });
+
+            const geminiModal = document.getElementById('gemini-modal');
+            const geminiModalCloseButton = document.getElementById('gemini-modal-close');
+            const geminiModalTitle = document.getElementById('gemini-modal-title');
+            const geminiModalPrompt = document.getElementById('gemini-modal-prompt');
+            const geminiUserInput = document.getElementById('gemini-user-input');
+            const geminiSubmitButton = document.getElementById('gemini-submit-button');
+            const geminiLoading = document.getElementById('gemini-loading');
+            const geminiResult = document.getElementById('gemini-result');
+            let currentSystemPrompt = "";
+
+            const openModal = (title, prompt, placeholder, systemPrompt) => {
+                geminiModalTitle.textContent = title;
+                geminiModalPrompt.textContent = prompt;
+                geminiUserInput.placeholder = placeholder;
+                currentSystemPrompt = systemPrompt;
+                geminiResult.innerHTML = "";
+                geminiUserInput.value = "";
+                geminiLoading.classList.add('hidden');
+                geminiSubmitButton.classList.remove('hidden');
+                geminiModal.classList.remove('hidden');
+            };
+
+            document.getElementById('open-electronics-ai').addEventListener('click', () => { openModal('Electronics Advisor ✨', 'Need help choosing?', 'e.g., "best TV for gaming under ₹40,000?"', 'You are an expert electronics sales assistant...'); });
+            document.getElementById('open-hardware-ai').addEventListener('click', () => { openModal('Hardware Project Estimator ✨', 'Describe your project for a material estimate.', 'e.g., "building a 10x12 foot concrete slab"', 'You are a helpful construction project estimator...'); });
+            document.getElementById('open-events-ai').addEventListener('click', () => { openModal('Event Planner AI ✨', 'Describe your event for creative ideas!', 'e.g., "a traditional wedding for 200 guests"', 'You are a creative event planner...'); });
+            
+            geminiModalCloseButton.addEventListener('click', () => geminiModal.classList.add('hidden'));
+            geminiModal.addEventListener('click', (e) => { if (e.target === geminiModal) geminiModal.classList.add('hidden'); });
+
+            const callGeminiAPI = async (userQuery, systemPrompt) => {
+                const apiKey = "YOUR_GEMINI_API_KEY_HERE"; // IMPORTANT: Replace with your actual key
+                if (apiKey === "YOUR_GEMINI_API_KEY_HERE") { return "API Key not configured. Please add your Gemini API key in the script section of the HTML file."; }
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+                const payload = { contents: [{ parts: [{ text: userQuery }] }], systemInstruction: { parts: [{ text: systemPrompt }] }, };
+                try {
+                    const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    const result = await response.json();
+                    return result.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, I couldn't generate a response.";
+                } catch (error) { console.error("API call failed:", error); return "Error connecting to the AI service. Please try again later."; }
+            };
+
+            geminiSubmitButton.addEventListener('click', async () => {
+                const userInput = geminiUserInput.value.trim();
+                if (!userInput) { geminiResult.textContent = "Please enter a description or question."; return; }
+                geminiLoading.classList.remove('hidden');
+                geminiSubmitButton.classList.add('hidden');
+                geminiResult.innerHTML = "";
+                const responseText = await callGeminiAPI(userInput, currentSystemPrompt);
+                geminiResult.textContent = responseText;
+                geminiLoading.classList.add('hidden');
+                geminiSubmitButton.classList.remove('hidden');
             });
         });
-
-        prevButton.addEventListener('click', () => {
-            if (currentImageIndex > 0) {
-                currentImageIndex--;
-                updateModalImage();
-            }
-        });
-
-        nextButton.addEventListener('click', () => {
-            if (currentImageIndex < currentImageSet.length - 1) {
-                currentImageIndex++;
-                updateModalImage();
-            }
-        });
-
-        const closeImageModal = () => { imageModal.classList.add('hidden'); };
-        imageModalCloseButton.addEventListener('click', closeImageModal);
-        imageModal.addEventListener('click', (e) => { if (e.target === imageModal) closeImageModal(); });
-
-        // --- Gemini AI Modal and API Logic ---
-        const geminiModal = document.getElementById('gemini-modal');
-        const geminiModalCloseButton = document.getElementById('gemini-modal-close');
-        const geminiModalTitle = document.getElementById('gemini-modal-title');
-        const geminiModalPrompt = document.getElementById('gemini-modal-prompt');
-        const geminiUserInput = document.getElementById('gemini-user-input');
-        const geminiSubmitButton = document.getElementById('gemini-submit-button');
-        const geminiLoading = document.getElementById('gemini-loading');
-        const geminiResult = document.getElementById('gemini-result');
-        let currentSystemPrompt = "";
-
-        const openModal = (title, prompt, placeholder, systemPrompt) => {
-            geminiModalTitle.textContent = title;
-            geminiModalPrompt.textContent = prompt;
-            geminiUserInput.placeholder = placeholder;
-            currentSystemPrompt = systemPrompt;
-            geminiResult.innerHTML = "";
-            geminiUserInput.value = "";
-            geminiLoading.classList.add('hidden');
-            geminiSubmitButton.classList.remove('hidden');
-            geminiModal.classList.remove('hidden');
-        };
-
-        document.getElementById('open-electronics-ai').addEventListener('click', () => {
-            openModal('Electronics Advisor ✨', 'Need help choosing? Describe what you\'re looking for.', 'e.g., "What\'s the best TV for gaming under ₹40,000?"', 'You are an expert electronics sales assistant for Archnanjali Associates. Provide a helpful, concise comparison or recommendation based on the user\'s query. Be friendly and focus on key features.');
-        });
-        document.getElementById('open-hardware-ai').addEventListener('click', () => {
-            openModal('Hardware Project Estimator ✨', 'Describe your construction project to get a material estimate.', 'e.g., "building a 10x12 foot concrete slab, 4 inches thick"', 'You are a helpful construction project estimator for Archnanjali Hardware. Based on the user\'s project description, provide a simple, bulleted list of estimated materials (like cement bags, sand volume, iron rods). Add a disclaimer that this is a rough estimate.');
-        });
-        document.getElementById('open-events-ai').addEventListener('click', () => {
-            openModal('Event Planner AI ✨', 'Describe your event to get creative ideas for themes, decor, and food!', 'e.g., "A traditional wedding reception for 200 guests"', 'You are a creative event planner for the Archnanjali Associates event hall. Based on the user\'s event description, generate exciting and brief ideas for a theme, decorations, and a sample food menu. Use bullet points for clarity.');
-        });
-
-        geminiModalCloseButton.addEventListener('click', () => geminiModal.classList.add('hidden'));
-        geminiModal.addEventListener('click', (e) => { if (e.target === geminiModal) geminiModal.classList.add('hidden'); });
-
-        const callGeminiAPI = async (userQuery, systemPrompt, retries = 3, delay = 1000) => {
-            const apiKey = ""; // API key is handled by the environment
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-            const payload = { contents: [{ parts: [{ text: userQuery }] }], systemInstruction: { parts: [{ text: systemPrompt }] }, };
-            try {
-                const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-                if (!response.ok) { throw new Error(`HTTP error! status: ${response.status}`); }
-                const result = await response.json();
-                const candidate = result.candidates?.[0];
-                if (candidate && candidate.content?.parts?.[0]?.text) { return candidate.content.parts[0].text; } 
-                else { return "Sorry, I couldn't generate a response. Please try again."; }
-            } catch (error) {
-                console.error("API call failed:", error);
-                if (retries > 0) {
-                    console.log(`Retrying... attempts left: ${retries}`);
-                    await new Promise(res => setTimeout(res, delay));
-                    return callGeminiAPI(userQuery, systemPrompt, retries - 1, delay * 2);
-                }
-                return "There was an error connecting to the AI service. Please check your connection and try again.";
-            }
-        };
-
-        geminiSubmitButton.addEventListener('click', async () => {
-            const userInput = geminiUserInput.value.trim();
-            if (!userInput) { geminiResult.textContent = "Please enter a description or question."; return; }
-            geminiLoading.classList.remove('hidden');
-            geminiSubmitButton.classList.add('hidden');
-            geminiResult.innerHTML = "";
-            const responseText = await callGeminiAPI(userInput, currentSystemPrompt);
-            geminiResult.textContent = responseText;
-            geminiLoading.classList.add('hidden');
-            geminiSubmitButton.classList.remove('hidden');
-        });
-
     </script>
 </body>
 </html>
