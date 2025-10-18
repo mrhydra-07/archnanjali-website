@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&family=Tangerine:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
             --color-primary: #2563eb; --color-secondary: #f97316; --color-accent: #16a34a;
@@ -48,6 +49,33 @@
         }
         .stars { display: flex; align-items: center; gap: 2px; }
         .stars svg { width: 16px; height: 16px; color: #f59e0b; }
+        /* --- DIWALI POPUP STYLES --- */
+#diwali-popup-backdrop { transition: opacity 0.3s ease-in-out; }
+#diwali-popup-content {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(145deg, #4a0e0e, #2c0808);
+    border: 2px solid transparent;
+    border-image: linear-gradient(to right, #ffc837, #ff8008) 1;
+    box-shadow: 0 0 30px rgba(255, 196, 55, 0.7);
+    animation: fadeInScale 0.5s ease-out forwards;
+    opacity: 0;
+    transform: scale(0.9);
+}
+@keyframes fadeInScale {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+.diwali-title {
+    font-family: 'Tangerine', cursive;
+    text-shadow: 0 0 10px #ffc837, 0 0 20px #ff8008;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+@keyframes glow {
+    from { text-shadow: 0 0 5px #ffc837, 0 0 10px #ff8008; }
+    to { text-shadow: 0 0 20px #ffc837, 0 0 30px #ff8008; }
+}
     </style>
 </head>
 <body class="antialiased">
@@ -224,9 +252,56 @@
     <!-- Modals -->
     <div id="gemini-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4"><div class="bg-white rounded-lg shadow-2xl p-6 w-full max-w-lg relative"><button id="gemini-modal-close" class="absolute top-3 right-3 text-gray-500 hover:text-gray-800"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button><h3 id="gemini-modal-title" class="text-2xl font-bold playfair mb-4">AI Assistant</h3><p id="gemini-modal-prompt" class="text-gray-600 mb-4">Describe what you need, and our AI will assist you!</p><textarea id="gemini-user-input" rows="4" class="w-full p-2 border border-gray-300 rounded-md" placeholder="e.g., 'Compare a smartphone and a smart TV for home entertainment' or 'Ideas for a wedding with 200 guests'"></textarea><button id="gemini-submit-button" class="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 font-semibold flex items-center justify-center">Get Ideas</button><div id="gemini-loading" class="hidden mt-4 flex justify-center items-center"><div class="loader"></div><p class="ml-4 text-gray-600">Generating ideas...</p></div><div id="gemini-result" class="mt-4 p-4 bg-gray-50 rounded-md max-h-64 overflow-y-auto" style="white-space: pre-wrap;"></div></div></div>
     <div id="image-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4"><div class="bg-white rounded-lg shadow-2xl p-4 w-full max-w-4xl relative"><button id="modal-close-button" class="absolute -top-4 -right-4 bg-white rounded-full p-2 z-20 text-gray-800 hover:bg-gray-200"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button><div class="relative"><img id="modal-image" src="" alt="Enlarged view" class="max-w-full max-h-[80vh] rounded-lg mx-auto mb-2"><button id="modal-prev-button" class="absolute top-1/2 left-2 -translate-y-1/2 bg-white bg-opacity-50 hover:bg-opacity-80 rounded-full p-3 transition"><svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg></button><button id="modal-next-button" class="absolute top-1/2 right-2 -translate-y-1/2 bg-white bg-opacity-50 hover:bg-opacity-80 rounded-full p-3 transition"><svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></button></div></div></div>
+<!-- DIWALI OFFER POPUP -->
+<div id="diwali-popup-backdrop" class="hidden fixed inset-0 bg-black bg-opacity-70 z-[100] flex items-center justify-center p-4">
+    <div id="diwali-popup-content" class="relative w-full max-w-lg rounded-lg text-white p-8 text-center">
+        <button id="diwali-popup-close" class="absolute -top-3 -right-3 bg-white rounded-full p-1 text-red-800 hover:bg-gray-200 transition-transform hover:scale-110">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+
+        <h2 class="text-6xl diwali-title text-yellow-300 mb-4">🪔 Shubh Deepavali! ✨</h2>
+        <p class="text-xl font-semibold text-gray-200 mb-2">Light up your home with joy & incredible savings!</p>
+        <p class="text-3xl font-bold text-white mb-6 bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 to-orange-400">HUGE FESTIVE DISCOUNTS!</p>
+        
+        <div class="bg-black bg-opacity-30 rounded-lg p-4 my-6">
+            <p class="font-medium text-gray-200">Visit our store to check the status of your order or explore our exclusive offers!</p>
+            <p class="font-semibold text-yellow-300 mt-2">Contact us for more details.</p>
+        </div>
+
+        <a href="#contact" id="diwali-contact-btn" class="mt-4 w-full inline-block bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-red-900 font-bold py-3 px-8 rounded-lg transition-transform duration-300 hover:scale-105 text-lg pulse-anim">
+            Contact Us Now
+        </a>
+    </div>
+</div>
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
+    // --- DIWALI POPUP LOGIC ---
+const diwaliPopupBackdrop = document.getElementById('diwali-popup-backdrop');
+const diwaliContactBtn = document.getElementById('diwali-contact-btn');
+const diwaliPopupCloseBtn = document.getElementById('diwali-popup-close');
+
+// Show popup only if it hasn't been shown in this session
+if (!sessionStorage.getItem('diwaliPopupShown')) {
+    setTimeout(() => {
+        if(diwaliPopupBackdrop) {
+            diwaliPopupBackdrop.classList.remove('hidden');
+            sessionStorage.setItem('diwaliPopupShown', 'true');
+        }
+    }, 3000); // Show after 3 seconds
+}
+
+const closeDiwaliPopup = () => {
+     if(diwaliPopupBackdrop) diwaliPopupBackdrop.classList.add('hidden');
+};
+
+if(diwaliPopupCloseBtn) diwaliPopupCloseBtn.addEventListener('click', closeDiwaliPopup);
+if(diwaliContactBtn) diwaliContactBtn.addEventListener('click', closeDiwaliPopup);
+if(diwaliPopupBackdrop) diwaliPopupBackdrop.addEventListener('click', (e) => {
+    if (e.target === diwaliPopupBackdrop) {
+        closeDiwaliPopup();
+    }
+});
         // --- PRODUCT DATABASE ---
         const allProducts = [
             // HOME ELECTRONICS
