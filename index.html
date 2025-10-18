@@ -276,6 +276,14 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
+    // Force page to load at the top
+if (history.scrollRestoration) {
+    history.scrollRestoration = 'manual';
+} else {
+    window.onbeforeunload = function () {
+        window.scrollTo(0, 0);
+    }
+}
     // --- DIWALI POPUP LOGIC ---
 const diwaliPopupBackdrop = document.getElementById('diwali-popup-backdrop');
 const diwaliContactBtn = document.getElementById('diwali-contact-btn');
