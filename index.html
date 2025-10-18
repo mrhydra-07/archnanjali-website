@@ -40,6 +40,14 @@
         .loader { border: 4px solid #f3f3f3; border-top: 4px solid var(--color-primary); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         .category-btn.active { background-color: var(--color-primary); color: white; }
+        .product-tag {
+            position: absolute; top: 12px; left: 12px;
+            background-color: var(--color-secondary); color: white;
+            padding: 2px 8px; font-size: 0.75rem; font-weight: bold;
+            border-radius: 9999px; text-transform: uppercase;
+        }
+        .stars { display: flex; align-items: center; gap: 2px; }
+        .stars svg { width: 16px; height: 16px; color: #f59e0b; }
     </style>
 </head>
 <body class="antialiased">
@@ -101,10 +109,14 @@
                     <div class="reveal">
                         <div class="text-center mb-12">
                             <h3 class="text-4xl font-bold text-gray-800 playfair inline-block">Archnanjali Town Mall</h3>
-                            <button id="open-electronics-ai" class="ml-4 inline-flex items-center bg-blue-100 text-blue-800 font-semibold py-2 px-4 rounded-full text-sm hover:bg-blue-200 transition">Help Me Choose ✨</button>
+                            <p class="text-lg text-gray-500 mt-2">We have all the electronics you need for everyday life — everything in one place.</p>
+                             <div class="mt-4 bg-blue-50 border-l-4 border-blue-500 text-blue-800 p-4 max-w-2xl mx-auto text-center rounded-r-lg">
+                                <p class="font-semibold">To purchase any of these products, please visit us in-store!</p>
+                            </div>
+                            <button id="open-electronics-ai" class="mt-6 inline-flex items-center bg-blue-100 text-blue-800 font-semibold py-2 px-4 rounded-full text-sm hover:bg-blue-200 transition">Help Me Choose ✨</button>
                         </div>
                         <div class="max-w-4xl mx-auto mb-8">
-                            <input type="text" id="product-search" placeholder="🔍 Search by name, brand, or category (e.g., 'Sony TV', 'Kitchen', 'Laptop')" class="w-full px-5 py-3 rounded-full border-2 border-gray-200 focus:outline-none focus:border-blue-500 transition">
+                            <input type="text" id="product-search" placeholder="🔍 Search by product, brand, or category (e.g., 'Samsung TV', 'LG Washing Machine')" class="w-full px-5 py-3 rounded-full border-2 border-gray-200 focus:outline-none focus:border-blue-500 transition">
                         </div>
                         <div id="category-filters" class="flex flex-wrap justify-center gap-2 md:gap-4 mb-12">
                             <!-- Category buttons will be inserted here by JavaScript -->
@@ -124,61 +136,16 @@
                             <button id="open-hardware-ai" class="ml-4 inline-flex items-center bg-green-100 text-green-800 font-semibold py-2 px-4 rounded-full text-sm hover:bg-green-200 transition">Project Estimator ✨</button>
                         </div>
                          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                            <div class="bg-white rounded-lg shadow-lg overflow-hidden product-card text-center">
-                                <img src="https://i.postimg.cc/PJ8Ytr3Z/C1-91988921.jpg" alt="Cement" class="w-full h-56 object-cover gallery-trigger" data-images="https://i.postimg.cc/PJ8Ytr3Z/C1-91988921.jpg,https://placehold.co/800x600/16a34a/eeeeee?text=Cement+Stack,https://placehold.co/800x600/16a34a/dddddd?text=Quality+Assurance">
-                                <div class="p-6">
-                                    <h4 class="text-xl font-bold">Premium Cement</h4>
-                                    <p class="text-sm text-gray-500 mt-2">OPC & PPC Grade for high-strength construction.</p>
-                                    <p class="text-2xl font-bold text-green-600 mt-2">₹450 / Bag</p>
-                                </div>
-                            </div>
-                            <div class="bg-white rounded-lg shadow-lg overflow-hidden product-card text-center">
-                                <img src="https://i.postimg.cc/VLnZgYfR/1a700363cdfbcc09c0bb85e03e8ec2e1-3811397728.jpg" alt="Iron Rods" class="w-full h-56 object-cover gallery-trigger" data-images="https://i.postimg.cc/VLnZgYfR/1a700363cdfbcc09c0bb85e03e8ec2e1-3811397728.jpg,https://placehold.co/800x600/16a34a/eeeeee?text=Rods+Bundle,https://placehold.co/800x600/16a34a/dddddd?text=Rods+Close-up">
-                                <div class="p-6">
-                                    <h4 class="text-xl font-bold">TMT Iron Rods</h4>
-                                    <p class="text-sm text-gray-500 mt-2">Corrosion-resistant TMT bars, all gauges available.</p>
-                                    <p class="text-2xl font-bold text-green-600 mt-2">Market Price</p>
-                                </div>
-                            </div>
-                            <div class="bg-white rounded-lg shadow-lg overflow-hidden product-card text-center">
-                                <img src="https://i.postimg.cc/FHxWtDJ1/silica-sand-3-1-4101564130.jpg" alt="Sand" class="w-full h-56 object-cover gallery-trigger" data-images="https://i.postimg.cc/FHxWtDJ1/silica-sand-3-1-4101564130.jpg,https://placehold.co/800x600/16a34a/eeeeee?text=Sand+Pile,https://placehold.co/800x600/16a34a/dddddd?text=Sieved+Sand">
-                                <div class="p-6">
-                                    <h4 class="text-xl font-bold">Construction Sand</h4>
-                                    <p class="text-sm text-gray-500 mt-2">Fine & Coarse sand for plaster and concrete work.</p>
-                                    <p class="text-2xl font-bold text-green-600 mt-2">Best Rate</p>
-                                </div>
-                            </div>
-                            <div class="bg-white rounded-lg shadow-lg overflow-hidden product-card text-center">
-                                <img src="https://i.postimg.cc/xCBgGZBF/Concrete-23-Granite-upclose-rough-seamless-texture-2048x2048-3388737263.jpg" alt="Concrete" class="w-full h-56 object-cover gallery-trigger" data-images="https://i.postimg.cc/xCBgGZBF/Concrete-23-Granite-upclose-rough-seamless-texture-2048x2048-3388737263.jpg,https://placehold.co/800x600/16a34a/eeeeee?text=Concrete+Mixer,https://placehold.co/800x600/16a34a/dddddd?text=Aggregate">
-                                <div class="p-6">
-                                    <h4 class="text-xl font-bold">Ready-Mix Concrete</h4>
-                                    <p class="text-sm text-gray-500 mt-2">High-quality mix, delivered to your site.</p>
-                                    <p class="text-2xl font-bold text-green-600 mt-2">Quote on Request</p>
-                                </div>
-                            </div>
+                            <div class="bg-white rounded-lg shadow-lg overflow-hidden product-card text-center"><img src="https://i.postimg.cc/PJ8Ytr3Z/C1-91988921.jpg" alt="Cement" class="w-full h-56 object-cover gallery-trigger" data-images="https://i.postimg.cc/PJ8Ytr3Z/C1-91988921.jpg,https://placehold.co/800x600/16a34a/eeeeee?text=Cement+Stack,https://placehold.co/800x600/16a34a/dddddd?text=Quality+Assurance"><div class="p-6"><h4 class="text-xl font-bold">Premium Cement</h4><p class="text-sm text-gray-500 mt-2">OPC & PPC Grade for high-strength construction.</p><p class="text-2xl font-bold text-green-600 mt-2">₹450 / Bag</p></div></div>
+                            <div class="bg-white rounded-lg shadow-lg overflow-hidden product-card text-center"><img src="https://i.postimg.cc/VLnZgYfR/1a700363cdfbcc09c0bb85e03e8ec2e1-3811397728.jpg" alt="Iron Rods" class="w-full h-56 object-cover gallery-trigger" data-images="https://i.postimg.cc/VLnZgYfR/1a700363cdfbcc09c0bb85e03e8ec2e1-3811397728.jpg,https://placehold.co/800x600/16a34a/eeeeee?text=Rods+Bundle,https://placehold.co/800x600/16a34a/dddddd?text=Rods+Close-up"><div class="p-6"><h4 class="text-xl font-bold">TMT Iron Rods</h4><p class="text-sm text-gray-500 mt-2">Corrosion-resistant TMT bars, all gauges available.</p><p class="text-2xl font-bold text-green-600 mt-2">Market Price</p></div></div>
+                            <div class="bg-white rounded-lg shadow-lg overflow-hidden product-card text-center"><img src="https://i.postimg.cc/FHxWtDJ1/silica-sand-3-1-4101564130.jpg" alt="Sand" class="w-full h-56 object-cover gallery-trigger" data-images="https://i.postimg.cc/FHxWtDJ1/silica-sand-3-1-4101564130.jpg,https://placehold.co/800x600/16a34a/eeeeee?text=Sand+Pile,https://placehold.co/800x600/16a34a/dddddd?text=Sieved+Sand"><div class="p-6"><h4 class="text-xl font-bold">Construction Sand</h4><p class="text-sm text-gray-500 mt-2">Fine & Coarse sand for plaster and concrete work.</p><p class="text-2xl font-bold text-green-600 mt-2">Best Rate</p></div></div>
+                            <div class="bg-white rounded-lg shadow-lg overflow-hidden product-card text-center"><img src="https://i.postimg.cc/xCBgGZBF/Concrete-23-Granite-upclose-rough-seamless-texture-2048x2048-3388737263.jpg" alt="Concrete" class="w-full h-56 object-cover gallery-trigger" data-images="https://i.postimg.cc/xCBgGZBF/Concrete-23-Granite-upclose-rough-seamless-texture-2048x2048-3388737263.jpg,https://placehold.co/800x600/16a34a/eeeeee?text=Concrete+Mixer,https://placehold.co/800x600/16a34a/dddddd?text=Aggregate"><div class="p-6"><h4 class="text-xl font-bold">Ready-Mix Concrete</h4><p class="text-sm text-gray-500 mt-2">High-quality mix, delivered to your site.</p><p class="text-2xl font-bold text-green-600 mt-2">Quote on Request</p></div></div>
                         </div>
                     </div>
                     
                     <!-- Marriage Hall -->
                     <div class="reveal">
-                        <div class="text-center mb-12">
-                            <h3 class="text-4xl font-bold text-gray-800 playfair inline-block">Marriage & Event Hall</h3>
-                            <button id="open-events-ai" class="ml-4 inline-flex items-center bg-orange-100 text-orange-800 font-semibold py-2 px-4 rounded-full text-sm hover:bg-orange-200 transition">Event Planner AI ✨</button>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-                            <div class="bg-white rounded-lg shadow-lg overflow-hidden product-card"><img src="https://i.postimg.cc/d1jg5wjM/birthday-party-halls-for-rent-beautiful-how-to-plan-a-quince-anos-party-of-birthday-party-halls-for.jpg" alt="Main Hall" class="w-full h-64 object-cover gallery-trigger" data-images="https://i.postimg.cc/d1jg5wjM/birthday-party-halls-for-rent-beautiful-how-to-plan-a-quince-anos-party-of-birthday-party-halls-for.jpg,https://placehold.co/800x600/f97316/eeeeee?text=Sitting+Arrangement,https://placehold.co/800x600/f97316/dddddd?text=Chandelier"><p class="text-center font-semibold p-3 bg-white text-lg">Spacious Main Hall</p></div>
-                            <div class="bg-white rounded-lg shadow-lg overflow-hidden product-card"><img src="https://i.postimg.cc/vZxjpWtz/gallery-3.jpg" alt="Dining Area" class="w-full h-64 object-cover gallery-trigger" data-images="https://i.postimg.cc/vZxjpWtz/gallery-3.jpg,https://placehold.co/800x600/f97316/eeeeee?text=Buffet+Setup,https://placehold.co/800x600/f97316/dddddd?text=Dining+Tables"><p class="text-center font-semibold p-3 bg-white text-lg">Elegant Dining Area</p></div>
-                            <div class="bg-white rounded-lg shadow-lg overflow-hidden product-card"><img src="https://i.postimg.cc/tCT8z01F/1h-B5-Z8gfmvs8mx-ZL-1fuykg.jpg" alt="Stage Decoration" class="w-full h-64 object-cover gallery-trigger" data-images="https://i.postimg.cc/tCT8z01F/1h-B5-Z8gfmvs8mx-ZL-1fuykg.jpg,https://placehold.co/800x600/f97316/eeeeee?text=Reception+Stage,https://placehold.co/800x600/f97316/dddddd?text=Flower+Decor"><p class="text-center font-semibold p-3 bg-white text-lg">Custom Stage Decoration</p></div>
-                        </div>
-                        <div class="bg-white rounded-lg shadow-lg p-8">
-                            <h4 class="text-2xl font-bold text-center mb-8 playfair">Features & Amenities</h4>
-                            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                                <div class="flex flex-col items-center"><svg class="w-12 h-12 text-orange-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg><p>Upto 500 Guests</p></div>
-                                <div class="flex flex-col items-center"><svg class="w-12 h-12 text-orange-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><p>Full Day Booking</p></div>
-                                <div class="flex flex-col items-center"><svg class="w-12 h-12 text-orange-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg><p>Power Backup</p></div>
-                                <div class="flex flex-col items-center"><svg class="w-12 h-12 text-orange-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg><p>Ample Parking</p></div>
-                            </div>
-                        </div>
+                        <div class="text-center mb-12"><h3 class="text-4xl font-bold text-gray-800 playfair inline-block">Marriage & Event Hall</h3><button id="open-events-ai" class="ml-4 inline-flex items-center bg-orange-100 text-orange-800 font-semibold py-2 px-4 rounded-full text-sm hover:bg-orange-200 transition">Event Planner AI ✨</button></div><div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12"><div class="bg-white rounded-lg shadow-lg overflow-hidden product-card"><img src="https://i.postimg.cc/d1jg5wjM/birthday-party-halls-for-rent-beautiful-how-to-plan-a-quince-anos-party-of-birthday-party-halls-for.jpg" alt="Main Hall" class="w-full h-64 object-cover gallery-trigger" data-images="https://i.postimg.cc/d1jg5wjM/birthday-party-halls-for-rent-beautiful-how-to-plan-a-quince-anos-party-of-birthday-party-halls-for.jpg,https://placehold.co/800x600/f97316/eeeeee?text=Sitting+Arrangement,https://placehold.co/800x600/f97316/dddddd?text=Chandelier"><p class="text-center font-semibold p-3 bg-white text-lg">Spacious Main Hall</p></div><div class="bg-white rounded-lg shadow-lg overflow-hidden product-card"><img src="https://i.postimg.cc/vZxjpWtz/gallery-3.jpg" alt="Dining Area" class="w-full h-64 object-cover gallery-trigger" data-images="https://i.postimg.cc/vZxjpWtz/gallery-3.jpg,https://placehold.co/800x600/f97316/eeeeee?text=Buffet+Setup,https://placehold.co/800x600/f97316/dddddd?text=Dining+Tables"><p class="text-center font-semibold p-3 bg-white text-lg">Elegant Dining Area</p></div><div class="bg-white rounded-lg shadow-lg overflow-hidden product-card"><img src="https://i.postimg.cc/tCT8z01F/1h-B5-Z8gfmvs8mx-ZL-1fuykg.jpg" alt="Stage Decoration" class="w-full h-64 object-cover gallery-trigger" data-images="https://i.postimg.cc/tCT8z01F/1h-B5-Z8gfmvs8mx-ZL-1fuykg.jpg,https://placehold.co/800x600/f97316/eeeeee?text=Reception+Stage,https://placehold.co/800x600/f97316/dddddd?text=Flower+Decor"><p class="text-center font-semibold p-3 bg-white text-lg">Custom Stage Decoration</p></div></div><div class="bg-white rounded-lg shadow-lg p-8"><h4 class="text-2xl font-bold text-center mb-8 playfair">Features & Amenities</h4><div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center"><div class="flex flex-col items-center"><svg class="w-12 h-12 text-orange-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg><p>Upto 500 Guests</p></div><div class="flex flex-col items-center"><svg class="w-12 h-12 text-orange-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><p>Full Day Booking</p></div><div class="flex flex-col items-center"><svg class="w-12 h-12 text-orange-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg><p>Power Backup</p></div><div class="flex flex-col items-center"><svg class="w-12 h-12 text-orange-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg><p>Ample Parking</p></div></div></div>
                     </div>
                 </div>
             </div>
@@ -186,98 +153,61 @@
 
         <!-- Special Offers Section -->
         <section id="offers" class="py-24 bg-white">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-20 reveal">
-                    <h2 class="text-4xl md:text-5xl font-bold text-gray-800 playfair">Featured Offers</h2>
-                    <p class="text-lg text-gray-500 mt-4 max-w-2xl mx-auto">Don't miss out on our best deals and top products.</p>
-                </div>
-
-                <!-- FESTIVAL OFFERS SECTION - UNCOMMENT TO ACTIVATE -->
-                <!-- 
+            <div class="container mx-auto px-6"><div class="text-center mb-20 reveal"><h2 class="text-4xl md:text-5xl font-bold text-gray-800 playfair">Featured Offers</h2><p class="text-lg text-gray-500 mt-4 max-w-2xl mx-auto">Don't miss out on our best deals and top products.</p></div><!-- FESTIVAL OFFERS SECTION - UNCOMMENT TO ACTIVATE --><!-- 
                 <div id="festival-offers" class="mb-20">
-                    <div class="text-center mb-10 reveal">
-                        <h3 class="text-3xl font-bold text-orange-500 playfair">✨ Diwali Dhamaka Sale ✨</h3>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                         <div class="bg-orange-50 border-2 border-orange-400 rounded-lg shadow-lg overflow-hidden offer-card text-center reveal">
-                            <div class="p-8">
-                                <h4 class="text-2xl font-bold">Free Soundbar with TVs</h4><p class="text-sm text-gray-500 uppercase tracking-wider my-2">ON SELECT MODELS</p><p class="text-gray-600 mb-4">This Diwali, bring home a cinematic experience. Get a premium soundbar absolutely free with select 4K TVs.</p><a href="#services" class="font-bold text-orange-600 hover:underline">Explore TVs</a>
-                            </div>
-                        </div>
-                        <div class="bg-orange-50 border-2 border-orange-400 rounded-lg shadow-lg overflow-hidden offer-card text-center reveal" style="transition-delay: 200ms;">
-                             <div class="p-8">
-                                <h4 class="text-2xl font-bold">Laptop Exchange Bonus</h4><p class="text-sm text-gray-500 uppercase tracking-wider my-2">EXTRA ₹5000 OFF</p><p class="text-gray-600 mb-4">Upgrade your old laptop and get an additional ₹5000 bonus discount on new gaming and professional laptops.</p><a href="#services" class="font-bold text-orange-600 hover:underline">Shop Laptops</a>
-                            </div>
-                        </div>
-                        <div class="bg-orange-50 border-2 border-orange-400 rounded-lg shadow-lg overflow-hidden offer-card text-center reveal" style="transition-delay: 400ms;">
-                            <div class="p-8">
-                                <h4 class="text-2xl font-bold">Kitchen Appliance Combo</h4><p class="text-sm text-gray-500 uppercase tracking-wider my-2">FLAT 20% OFF</p><p class="text-gray-600 mb-4">Renovate your kitchen! Get a flat 20% discount when you buy a mixer grinder, induction cooktop, and electric kettle together.</p><a href="#services" class="font-bold text-orange-600 hover:underline">Explore Kitchen Appliances</a>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="text-center mb-10 reveal"><h3 class="text-3xl font-bold text-orange-500 playfair">✨ Diwali Dhamaka Sale ✨</h3></div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"><div class="bg-orange-50 border-2 border-orange-400 rounded-lg shadow-lg overflow-hidden offer-card text-center reveal"><div class="p-8"><h4 class="text-2xl font-bold">Free Soundbar with TVs</h4><p class="text-sm text-gray-500 uppercase tracking-wider my-2">ON SELECT MODELS</p><p class="text-gray-600 mb-4">This Diwali, bring home a cinematic experience. Get a premium soundbar absolutely free with select 4K TVs.</p><a href="#services" class="font-bold text-orange-600 hover:underline">Explore TVs</a></div></div><div class="bg-orange-50 border-2 border-orange-400 rounded-lg shadow-lg overflow-hidden offer-card text-center reveal" style="transition-delay: 200ms;"><div class="p-8"><h4 class="text-2xl font-bold">Laptop Exchange Bonus</h4><p class="text-sm text-gray-500 uppercase tracking-wider my-2">EXTRA ₹5000 OFF</p><p class="text-gray-600 mb-4">Upgrade your old laptop and get an additional ₹5000 bonus discount on new gaming and professional laptops.</p><a href="#services" class="font-bold text-orange-600 hover:underline">Shop Laptops</a></div></div><div class="bg-orange-50 border-2 border-orange-400 rounded-lg shadow-lg overflow-hidden offer-card text-center reveal" style="transition-delay: 400ms;"><div class="p-8"><h4 class="text-2xl font-bold">Kitchen Appliance Combo</h4><p class="text-sm text-gray-500 uppercase tracking-wider my-2">FLAT 20% OFF</p><p class="text-gray-600 mb-4">Renovate your kitchen! Get a flat 20% discount when you buy a mixer grinder, induction cooktop, and electric kettle together.</p><a href="#services" class="font-bold text-orange-600 hover:underline">Explore Kitchen Appliances</a></div></div></div>
                      <hr class="my-20 border-gray-300">
                 </div>
-                -->
-
-                <!-- REGULAR OFFERS -->
-                <div id="regular-offers">
-                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                        <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden offer-card text-center reveal">
-                            <div class="p-8">
-                                <h4 class="text-2xl font-bold">Smart TV Bonanza</h4><p class="text-sm text-gray-500 uppercase tracking-wider my-2">UP TO 30% OFF</p><p class="text-gray-600 mb-4">Get the latest 4K Smart TVs from top brands at unbeatable prices. Perfect for movie nights and gaming.</p><a href="#services" class="font-bold text-blue-600 hover:underline">Shop TVs</a>
-                            </div>
-                        </div>
-                        <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden offer-card text-center reveal" style="transition-delay: 200ms;">
-                             <div class="p-8">
-                                <h4 class="text-2xl font-bold">Bulk Construction Deal</h4><p class="text-sm text-gray-500 uppercase tracking-wider my-2">SPECIAL RATES</p><p class="text-gray-600 mb-4">Planning a big project? Get special pricing on bulk orders of cement, sand, and iron rods.</p><a href="#contact" class="font-bold text-green-600 hover:underline">Request a Quote</a>
-                            </div>
-                        </div>
-                        <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden offer-card text-center reveal" style="transition-delay: 400ms;">
-                            <div class="p-8">
-                                <h4 class="text-2xl font-bold">Early Event Booking</h4><p class="text-sm text-gray-500 uppercase tracking-wider my-2">15% DISCOUNT</p><p class="text-gray-600 mb-4">Book our event hall more than 3 months in advance and receive a 15% discount on the total package.</p><a href="#contact" class="font-bold text-orange-600 hover:underline">Enquire Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+                --><div id="regular-offers"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"><div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden offer-card text-center reveal"><div class="p-8"><h4 class="text-2xl font-bold">Smart TV Bonanza</h4><p class="text-sm text-gray-500 uppercase tracking-wider my-2">UP TO 30% OFF</p><p class="text-gray-600 mb-4">Get the latest 4K Smart TVs from top brands at unbeatable prices. Perfect for movie nights and gaming.</p><a href="#services" class="font-bold text-blue-600 hover:underline">Shop TVs</a></div></div><div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden offer-card text-center reveal" style="transition-delay: 200ms;"><div class="p-8"><h4 class="text-2xl font-bold">Bulk Construction Deal</h4><p class="text-sm text-gray-500 uppercase tracking-wider my-2">SPECIAL RATES</p><p class="text-gray-600 mb-4">Planning a big project? Get special pricing on bulk orders of cement, sand, and iron rods.</p><a href="#contact" class="font-bold text-green-600 hover:underline">Request a Quote</a></div></div><div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden offer-card text-center reveal" style="transition-delay: 400ms;"><div class="p-8"><h4 class="text-2xl font-bold">Early Event Booking</h4><p class="text-sm text-gray-500 uppercase tracking-wider my-2">15% DISCOUNT</p><p class="text-gray-600 mb-4">Book our event hall more than 3 months in advance and receive a 15% discount on the total package.</p><a href="#contact" class="font-bold text-orange-600 hover:underline">Enquire Now</a></div></div></div></div></div>
         </section>
 
         <!-- Testimonials Section -->
         <section id="testimonials" class="py-24 bg-gray-50">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-20 reveal">
-                    <h2 class="text-4xl md:text-5xl font-bold text-gray-800 playfair">What Our Customers Say</h2>
-                     <p class="text-lg text-gray-500 mt-4 max-w-2xl mx-auto">Our commitment to quality, reflected in their words.</p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="bg-white p-8 rounded-lg shadow-lg testimonial-card reveal">
-                        <p class="text-gray-600 mb-6 italic">"The best electronics store in Madhubani. I got a great deal on my new laptop, and the service was incredibly helpful and professional."</p>
-                        <p class="font-bold text-gray-800">- Rohan Kumar</p>
-                        <p class="text-sm text-gray-500">Madhubani, Bihar | <span class="text-green-600 font-semibold">✓ Verified Purchase</span></p>
-                    </div>
-                    <div class="bg-white p-8 rounded-lg shadow-lg testimonial-card reveal" style="transition-delay: 200ms;">
-                         <p class="text-gray-600 mb-6 italic">"Archnanjali supplied all the materials for our new home. The quality of the iron and cement was top-notch, and delivery was always on time."</p>
-                        <p class="font-bold text-gray-800">- Priya Construction Co.</p>
-                        <p class="text-sm text-gray-500">Darbhanga, Bihar | <span class="text-green-600 font-semibold">✓ Verified Purchase</span></p>
-                    </div>
-                    <div class="bg-white p-8 rounded-lg shadow-lg testimonial-card reveal" style="transition-delay: 400ms;">
-                         <p class="text-gray-600 mb-6 italic">"We hosted our daughter's wedding here and it was perfect. The hall is beautiful, spacious, and the management was extremely cooperative."</p>
-                        <p class="font-bold text-gray-800">- The Sharma Family</p>
-                        <p class="text-sm text-gray-500">Madhubani, Bihar | <span class="text-green-600 font-semibold">✓ Verified Purchase</span></p>
-                    </div>
-                </div>
-            </div>
+            <div class="container mx-auto px-6"><div class="text-center mb-20 reveal"><h2 class="text-4xl md:text-5xl font-bold text-gray-800 playfair">What Our Customers Say</h2><p class="text-lg text-gray-500 mt-4 max-w-2xl mx-auto">Our commitment to quality, reflected in their words.</p></div><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"><div class="bg-white p-8 rounded-lg shadow-lg testimonial-card reveal"><p class="text-gray-600 mb-6 italic">"The best electronics store in Madhubani. I got a great deal on my new laptop, and the service was incredibly helpful and professional."</p><p class="font-bold text-gray-800">- Rohan Kumar</p><p class="text-sm text-gray-500">Madhubani, Bihar | <span class="text-green-600 font-semibold">✓ Verified Purchase</span></p></div><div class="bg-white p-8 rounded-lg shadow-lg testimonial-card reveal" style="transition-delay: 200ms;"><p class="text-gray-600 mb-6 italic">"Archnanjali supplied all the materials for our new home. The quality of the iron and cement was top-notch, and delivery was always on time."</p><p class="font-bold text-gray-800">- Priya Construction Co.</p><p class="text-sm text-gray-500">Darbhanga, Bihar | <span class="text-green-600 font-semibold">✓ Verified Purchase</span></p></div><div class="bg-white p-8 rounded-lg shadow-lg testimonial-card reveal" style="transition-delay: 400ms;"><p class="text-gray-600 mb-6 italic">"We hosted our daughter's wedding here and it was perfect. The hall is beautiful, spacious, and the management was extremely cooperative."</p><p class="font-bold text-gray-800">- The Sharma Family</p><p class="text-sm text-gray-500">Madhubani, Bihar | <span class="text-green-600 font-semibold">✓ Verified Purchase</span></p></div></div></div>
         </section>
         
         <!-- FAQ Section -->
         <section id="faq" class="py-24 bg-white">
-             <!-- ... (FAQ HTML remains unchanged) ... -->
+             <div class="container mx-auto px-6">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-800 playfair">Frequently Asked Questions</h2>
+                </div>
+                <div class="max-w-3xl mx-auto space-y-4 reveal">
+                    <div class="faq-item border-b border-gray-200 pb-4"><div class="faq-question flex justify-between items-center py-4"><h4 class="text-lg font-semibold">Do you offer home delivery for electronics and hardware?</h4><svg class="faq-icon w-6 h-6 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></div><div class="faq-answer px-4"><p class="text-gray-600">Yes, we offer home delivery for all our products within the local Madhubani area. Delivery charges may apply based on distance and order size. Please contact us for details.</p></div></div>
+                    <div class="faq-item border-b border-gray-200 pb-4"><div class="faq-question flex justify-between items-center py-4"><h4 class="text-lg font-semibold">What is the booking process for the marriage hall?</h4><svg class="faq-icon w-6 h-6 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></div><div class="faq-answer px-4"><p class="text-gray-600">To book our hall, please contact us to check for availability on your desired date. A 50% advance payment is required to confirm the booking, with the remaining balance due one week before the event.</p></div></div>
+                    <div class="faq-item border-b border-gray-200 pb-4"><div class="faq-question flex justify-between items-center py-4"><h4 class="text-lg font-semibold">Do you provide warranties on electronic items?</h4><svg class="faq-icon w-6 h-6 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></div><div class="faq-answer px-4"><p class="text-gray-600">Absolutely. All electronic products come with the official brand warranty. We are an authorized dealer for all brands we carry, and we will assist you with any warranty claims.</p></div></div>
+                </div>
+            </div>
         </section>
 
         <!-- Contact Section -->
         <section id="contact" class="py-24 bg-gray-50">
-             <!-- ... (Contact HTML remains unchanged) ... -->
+             <div class="container mx-auto px-6">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-800 playfair">Get In Touch</h2>
+                    <p class="text-lg text-gray-500 mt-4">We're here to help. Contact us for quotes, bookings, and inquiries.</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-xl p-8 max-w-5xl mx-auto grid md:grid-cols-2 gap-12 reveal">
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-3 playfair">Contact Information</h3>
+                            <p><strong>Proprietor:</strong> Shashikant Jha</p>
+                            <p><strong>Address:</strong> Madhubani - Rajnagar Rd, Laheriya Ganj, Madhubani, Bihar</p>
+                            <p><strong>Email:</strong> <a href="mailto:archanjaliassociates@gmail.com" class="text-blue-600 hover:underline">archanjaliassociates@gmail.com</a></p>
+                            <p><strong>Phone:</strong> <a href="tel:7007688136" class="text-blue-600 hover:underline">7007688136</a></p>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold mt-6 mb-3 playfair">Opening Hours</h3>
+                            <p><strong>Mon - Sat:</strong> 6:00 AM - 10:00 PM</p>
+                            <p><strong>Sun:</strong> 9:00 AM - 9:00 PM</p>
+                        </div>
+                    </div>
+                    <div>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3574.004928157778!2d86.07471881503387!3d26.39097748335553!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39edcb88e63a347d%3A0x68b31a396d18a09b!2sLaheriya%20Ganj%2C%20Madhubani%2C%20Bihar%20847211%2C%20India!5e0!3m2!1sen!2sus!4v1678886400000!5m2!1sen!2sus" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" class="rounded-lg shadow-md" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
@@ -292,31 +222,42 @@
     </button>
 
     <!-- Modals -->
-    <!-- ... (Modal HTML remains unchanged) ... -->
-    <div id="gemini-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-lg shadow-2xl p-6 w-full max-w-lg relative"><button id="gemini-modal-close" class="absolute top-3 right-3 text-gray-500 hover:text-gray-800"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button><h3 id="gemini-modal-title" class="text-2xl font-bold playfair mb-4">AI Assistant</h3><p id="gemini-modal-prompt" class="text-gray-600 mb-4">Describe what you need, and our AI will assist you!</p><textarea id="gemini-user-input" rows="4" class="w-full p-2 border border-gray-300 rounded-md" placeholder="e.g., 'Compare a smartphone and a smart TV for home entertainment' or 'Ideas for a wedding with 200 guests'"></textarea><button id="gemini-submit-button" class="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 font-semibold flex items-center justify-center">Get Ideas</button><div id="gemini-loading" class="hidden mt-4 flex justify-center items-center"><div class="loader"></div><p class="ml-4 text-gray-600">Generating ideas...</p></div><div id="gemini-result" class="mt-4 p-4 bg-gray-50 rounded-md max-h-64 overflow-y-auto" style="white-space: pre-wrap;"></div></div>
-    </div>
-    <div id="image-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-lg shadow-2xl p-4 w-full max-w-4xl relative"><button id="modal-close-button" class="absolute -top-4 -right-4 bg-white rounded-full p-2 z-20 text-gray-800 hover:bg-gray-200"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button><div class="relative"><img id="modal-image" src="" alt="Enlarged view" class="max-w-full max-h-[80vh] rounded-lg mx-auto mb-2"><button id="modal-prev-button" class="absolute top-1/2 left-2 -translate-y-1/2 bg-white bg-opacity-50 hover:bg-opacity-80 rounded-full p-3 transition"><svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg></button><button id="modal-next-button" class="absolute top-1/2 right-2 -translate-y-1/2 bg-white bg-opacity-50 hover:bg-opacity-80 rounded-full p-3 transition"><svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></button></div></div>
-    </div>
+    <div id="gemini-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4"><div class="bg-white rounded-lg shadow-2xl p-6 w-full max-w-lg relative"><button id="gemini-modal-close" class="absolute top-3 right-3 text-gray-500 hover:text-gray-800"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button><h3 id="gemini-modal-title" class="text-2xl font-bold playfair mb-4">AI Assistant</h3><p id="gemini-modal-prompt" class="text-gray-600 mb-4">Describe what you need, and our AI will assist you!</p><textarea id="gemini-user-input" rows="4" class="w-full p-2 border border-gray-300 rounded-md" placeholder="e.g., 'Compare a smartphone and a smart TV for home entertainment' or 'Ideas for a wedding with 200 guests'"></textarea><button id="gemini-submit-button" class="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 font-semibold flex items-center justify-center">Get Ideas</button><div id="gemini-loading" class="hidden mt-4 flex justify-center items-center"><div class="loader"></div><p class="ml-4 text-gray-600">Generating ideas...</p></div><div id="gemini-result" class="mt-4 p-4 bg-gray-50 rounded-md max-h-64 overflow-y-auto" style="white-space: pre-wrap;"></div></div></div>
+    <div id="image-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4"><div class="bg-white rounded-lg shadow-2xl p-4 w-full max-w-4xl relative"><button id="modal-close-button" class="absolute -top-4 -right-4 bg-white rounded-full p-2 z-20 text-gray-800 hover:bg-gray-200"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button><div class="relative"><img id="modal-image" src="" alt="Enlarged view" class="max-w-full max-h-[80vh] rounded-lg mx-auto mb-2"><button id="modal-prev-button" class="absolute top-1/2 left-2 -translate-y-1/2 bg-white bg-opacity-50 hover:bg-opacity-80 rounded-full p-3 transition"><svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg></button><button id="modal-next-button" class="absolute top-1/2 right-2 -translate-y-1/2 bg-white bg-opacity-50 hover:bg-opacity-80 rounded-full p-3 transition"><svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></button></div></div></div>
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // --- Product Data ---
-        // To add/edit products, modify this array.
+        // --- PRODUCT DATABASE ---
         const allProducts = [
-            { id: 1, name: 'Smart Refrigerator', brand: 'Samsung', price: '₹65,000', description: '253L frost-free refrigerator with digital inverter.', category: 'Home', mainImage: 'https://i.postimg.cc/63F41xWH/6497866cv13d-27454837.jpg', galleryImages: ['https://i.postimg.cc/63F41xWH/6497866cv13d-27454837.jpg', 'https://placehold.co/800x600/3b82f6/eeeeee?text=Fridge+Open', 'https://placehold.co/800x600/3b82f6/dddddd?text=Fridge+Side'] },
-            { id: 2, name: 'Front Load Washer', brand: 'LG', price: '₹34,500', description: '7kg fully-automatic washing machine with smart diagnosis.', category: 'Home', mainImage: 'https://i.postimg.cc/dVXFCs4m/whirlpool-7-kg.jpg', galleryImages: ['https://i.postimg.cc/dVXFCs4m/whirlpool-7-kg.jpg', 'https://placehold.co/800x600/3b82f6/eeeeee?text=Washer+Top', 'https://placehold.co/800x600/3b82f6/dddddd?text=Washer+Drum'] },
-            { id: 3, name: 'Bluetooth Speaker', brand: 'Sony', price: '₹8,999', description: 'Extra Bass portable wireless speaker with 12-hour battery life.', category: 'Gadgets', mainImage: 'https://i.postimg.cc/cCXyL0vF/0eff0afa-4df7-4cc6-8db8-3d89e4e4f210-739169e90f698abb173f3dd03dce2437-1276145015.jpg', galleryImages: ['https://i.postimg.cc/cCXyL0vF/0eff0afa-4df7-4cc6-8db8-3d89e4e4f210-739169e90f698abb173f3dd03dce2437-1276145015.jpg', 'https://placehold.co/800x600/3b82f6/eeeeee?text=Speaker+Side', 'https://placehold.co/800x600/3b82f6/dddddd?text=Speaker+Top'] },
-            { id: 4, name: 'Gaming Laptop', brand: 'Dell', price: '₹72,000', description: '15.6" FHD display with NVIDIA RTX 3050 graphics.', category: 'Computers', mainImage: 'https://i.postimg.cc/8PXg8kQz/73804961-253632609.jpg', galleryImages: ['https://i.postimg.cc/8PXg8kQz/73804961-253632609.jpg', 'https://placehold.co/800x600/3b82f6/eeeeee?text=Laptop+Keyboard', 'https://placehold.co/800x600/3b82f6/dddddd?text=Laptop+Side'] },
-            { id: 5, name: '4K Smart TV', brand: 'Sony', price: '₹52,500', description: '55-inch Bravia 4K Ultra HD Smart LED Google TV.', category: 'Home', mainImage: 'https://placehold.co/600x600/3b82f6/ffffff?text=Sony+TV', galleryImages: ['https://placehold.co/800x600/3b82f6/ffffff?text=TV+Front', 'https://placehold.co/800x600/3b82f6/eeeeee?text=TV+Remote', 'https://placehold.co/800x600/3b82f6/dddddd?text=TV+Ports'] },
-            { id: 6, name: 'Air Conditioner', brand: 'Voltas', price: '₹35,500', description: '1.5 Ton 5-Star inverter split AC with copper condenser.', category: 'Home', mainImage: 'https://placehold.co/600x600/3b82f6/ffffff?text=AC', galleryImages: ['https://placehold.co/800x600/3b82f6/ffffff?text=AC+Unit', 'https://placehold.co/800x600/3b82f6/eeeeee?text=AC+Outdoor', 'https://placehold.co/800x600/3b82f6/dddddd?text=AC+Remote'] },
-            { id: 7, name: 'Mixer Grinder', brand: 'Preethi', price: '₹4,500', description: '750W motor with 3 stainless steel jars for tough grinding.', category: 'Kitchen', mainImage: 'https://placehold.co/600x600/3b82f6/ffffff?text=Mixer', galleryImages: ['https://placehold.co/800x600/3b82f6/ffffff?text=Mixer+Front', 'https://placehold.co/800x600/3b82f6/eeeeee?text=Mixer+Jars', 'https://placehold.co/800x600/3b82f6/dddddd?text=Mixer+Motor'] },
-            { id: 8, name: 'Microwave Oven', brand: 'IFB', price: '₹12,800', description: '25L convection microwave oven for baking, grilling, and heating.', category: 'Kitchen', mainImage: 'https://placehold.co/600x600/3b82f6/ffffff?text=Microwave', galleryImages: ['https://placehold.co/800x600/3b82f6/ffffff?text=Microwave+Front', 'https://placehold.co/800x600/3b82f6/eeeeee?text=Microwave+Open', 'https://placehold.co/800x600/3b82f6/dddddd?text=Microwave+Panel'] },
-            { id: 9, name: 'Smartphone', brand: 'OnePlus', price: '₹29,999', description: '12R model with 8GB RAM, 128GB storage, and Snapdragon processor.', category: 'Gadgets', mainImage: 'https://placehold.co/600x600/3b82f6/ffffff?text=Phone', galleryImages: ['https://placehold.co/800x600/3b82f6/ffffff?text=Phone+Front', 'https://placehold.co/800x600/3b82f6/eeeeee?text=Phone+Back', 'https://placehold.co/800x600/3b82f6/dddddd?text=Phone+Camera'] },
-            { id: 10, name: 'Smartwatch', brand: 'Amazfit', price: '₹5,999', description: 'Fitness watch with heart rate monitor, SpO2, and GPS.', category: 'Gadgets', mainImage: 'https://placehold.co/600x600/3b82f6/ffffff?text=Watch', galleryImages: ['https://placehold.co/800x600/3b82f6/ffffff?text=Watch+Face', 'https://placehold.co/800x600/3b82f6/eeeeee?text=Watch+Side', 'https://placehold.co/800x600/3b82f6/dddddd?text=Watch+Strap'] },
-            { id: 11, name: 'Wireless Printer', brand: 'HP', price: '₹12,200', description: 'All-in-one printer with WiFi for easy printing from any device.', category: 'Computers', mainImage: 'https://placehold.co/600x600/3b82f6/ffffff?text=Printer', galleryImages: ['https://placehold.co/800x600/3b82f6/ffffff?text=Printer+Front', 'https://placehold.co/800x600/3b82f6/eeeeee?text=Printer+Scanner', 'https://placehold.co/800x600/3b82f6/dddddd?text=Printer+Tray'] },
-            { id: 12, name: 'CCTV Camera', brand: 'CP Plus', price: '₹2,500', description: 'Full HD dome camera with night vision for home security.', category: 'Security', mainImage: 'https://placehold.co/600x600/3b82f6/ffffff?text=CCTV', galleryImages: ['https://placehold.co/800x600/3b82f6/ffffff?text=Camera+Front', 'https://placehold.co/800x600/3b82f6/eeeeee?text=Camera+Side', 'https://placehold.co/800x600/3b82f6/dddddd?text=Camera+Lens'] }
+            // HOME ELECTRONICS
+            { id: 1, name: 'Samsung 4K UHD TV', brand: 'Samsung', price: '₹48,000', originalPrice: '₹55,000', rating: 4.7, description: '55-inch Crystal 4K Neo Series with vibrant colors and smart features.', category: 'Home', tag: 'Best Seller', mainImage: 'https://placehold.co/600x600/3b82f6/ffffff?text=Samsung+TV', galleryImages: ['https://placehold.co/800x600/3b82f6/ffffff?text=TV+Front', 'https://placehold.co/800x600/3b82f6/eeeeee?text=TV+Remote', 'https://placehold.co/800x600/3b82f6/dddddd?text=TV+Side', 'https://placehold.co/800x600/3b82f6/cccccc?text=TV+Ports'] },
+            { id: 2, name: 'LG OLED TV', brand: 'LG', price: '₹95,000', originalPrice: '₹1,10,000', rating: 4.9, description: '55-inch C2 Evo Series with self-lit pixels for perfect black and infinite contrast.', category: 'Home', tag: 'Premium', mainImage: 'https://placehold.co/600x600/1f2937/ffffff?text=LG+OLED', galleryImages: ['https://placehold.co/800x600/1f2937/ffffff?text=LG+TV+1', 'https://placehold.co/800x600/1f2937/eeeeee?text=LG+TV+2', 'https://placehold.co/800x600/1f2937/dddddd?text=LG+TV+3', 'https://placehold.co/800x600/1f2937/cccccc?text=LG+TV+4'] },
+            { id: 3, name: 'Sony Bravia LED TV', brand: 'Sony', price: '₹52,500', originalPrice: null, rating: 4.6, description: '55-inch Bravia 4K Ultra HD Smart LED Google TV with X1 processor.', category: 'Home', tag: null, mainImage: 'https://placehold.co/600x600/000000/ffffff?text=Sony+TV', galleryImages: ['https://placehold.co/800x600/000000/ffffff?text=Sony+1', 'https://placehold.co/800x600/000000/eeeeee?text=Sony+2', 'https://placehold.co/800x600/000000/dddddd?text=Sony+3', 'https://placehold.co/800x600/000000/cccccc?text=Sony+4'] },
+            { id: 4, name: 'Smart Refrigerator', brand: 'Samsung', price: '₹65,000', originalPrice: '₹72,000', rating: 4.5, description: '253L frost-free refrigerator with digital inverter technology for energy savings.', category: 'Home', tag: null, mainImage: 'https://i.postimg.cc/63F41xWH/6497866cv13d-27454837.jpg', galleryImages: ['https://i.postimg.cc/63F41xWH/6497866cv13d-27454837.jpg', 'https://placehold.co/800x600/3b82f6/eeeeee?text=Fridge+Open', 'https://placehold.co/800x600/3b82f6/dddddd?text=Fridge+Side', 'https://placehold.co/800x600/3b82f6/cccccc?text=Fridge+Interior'] },
+            { id: 5, name: 'Front Load Washer', brand: 'LG', price: '₹34,500', originalPrice: null, rating: 4.8, description: '7kg fully-automatic washing machine with 6 Motion DD technology and smart diagnosis.', category: 'Home', tag: 'New Arrival', mainImage: 'https://i.postimg.cc/dVXFCs4m/whirlpool-7-kg.jpg', galleryImages: ['https://i.postimg.cc/dVXFCs4m/whirlpool-7-kg.jpg', 'https://placehold.co/800x600/3b82f6/eeeeee?text=Washer+Top', 'https://placehold.co/800x600/3b82f6/dddddd?text=Washer+Drum', 'https://placehold.co/800x600/3b82f6/cccccc?text=Washer+Panel'] },
+            { id: 6, name: 'Air Conditioner', brand: 'Voltas', price: '₹35,500', originalPrice: '₹38,000', rating: 4.4, description: '1.5 Ton 5-Star inverter split AC with copper condenser for efficient cooling.', category: 'Home', tag: null, mainImage: 'https://placehold.co/600x600/3b82f6/ffffff?text=AC', galleryImages: ['https://placehold.co/800x600/3b82f6/ffffff?text=AC+Unit', 'https://placehold.co/800x600/3b82f6/eeeeee?text=AC+Outdoor', 'https://placehold.co/800x600/3b82f6/dddddd?text=AC+Remote', 'https://placehold.co/800x600/3b82f6/cccccc?text=AC+Features'] },
+
+            // KITCHEN APPLIANCES
+            { id: 7, name: 'Mixer Grinder', brand: 'Preethi', price: '₹4,500', originalPrice: null, rating: 4.7, description: '750W motor with 3 stainless steel jars for tough grinding and blending tasks.', category: 'Kitchen', tag: 'Best Seller', mainImage: 'https://placehold.co/600x600/3b82f6/ffffff?text=Mixer', galleryImages: ['https://placehold.co/800x600/3b82f6/ffffff?text=Mixer+Front', 'https://placehold.co/800x600/3b82f6/eeeeee?text=Mixer+Jars', 'https://placehold.co/800x600/3b82f6/dddddd?text=Mixer+Motor', 'https://placehold.co/800x600/3b82f6/cccccc?text=Mixer+Blades'] },
+            { id: 8, name: 'Microwave Oven', brand: 'IFB', price: '₹12,800', originalPrice: '₹14,000', rating: 4.3, description: '25L convection microwave for baking, grilling, reheating and defrosting.', category: 'Kitchen', tag: null, mainImage: 'https://placehold.co/600x600/3b82f6/ffffff?text=Microwave', galleryImages: ['https://placehold.co/800x600/3b82f6/ffffff?text=Microwave+Front', 'https://placehold.co/800x600/3b82f6/eeeeee?text=Microwave+Open', 'https://placehold.co/800x600/3b82f6/dddddd?text=Microwave+Panel', 'https://placehold.co/800x600/3b82f6/cccccc?text=Microwave+Plate'] },
+            { id: 9, name: 'Air Fryer', brand: 'Philips', price: '₹8,500', originalPrice: null, rating: 4.6, description: 'Digital Air Fryer with Rapid Air technology for healthy, oil-free cooking.', category: 'Kitchen', tag: 'New Arrival', mainImage: 'https://placehold.co/600x600/3b82f6/ffffff?text=Air+Fryer', galleryImages: ['https://placehold.co/800x600/3b82f6/ffffff?text=Fryer+1', 'https://placehold.co/800x600/3b82f6/eeeeee?text=Fryer+2', 'https://placehold.co/800x600/3b82f6/dddddd?text=Fryer+3', 'https://placehold.co/800x600/3b82f6/cccccc?text=Fryer+4'] },
+
+            // PERSONAL GADGETS
+            { id: 10, name: 'OnePlus Smartphone', brand: 'OnePlus', price: '₹29,999', originalPrice: null, rating: 4.8, description: '12R model with 8GB RAM, 128GB storage, and a powerful Snapdragon processor.', category: 'Gadgets', tag: 'New Arrival', mainImage: 'https://placehold.co/600x600/3b82f6/ffffff?text=OnePlus', galleryImages: ['https://placehold.co/800x600/3b82f6/ffffff?text=Phone+Front', 'https://placehold.co/800x600/3b82f6/eeeeee?text=Phone+Back', 'https://placehold.co/800x600/3b82f6/dddddd?text=Phone+Camera', 'https://placehold.co/800x600/3b82f6/cccccc?text=Phone+Screen'] },
+            { id: 11, name: 'Samsung Galaxy S23', brand: 'Samsung', price: '₹75,000', originalPrice: null, rating: 4.9, description: 'Flagship phone with pro-grade camera, powerful performance and dynamic display.', category: 'Gadgets', tag: 'Premium', mainImage: 'https://placehold.co/600x600/1f2937/ffffff?text=Galaxy+S23', galleryImages: ['https://placehold.co/800x600/1f2937/ffffff?text=S23+1', 'https://placehold.co/800x600/1f2937/eeeeee?text=S23+2', 'https://placehold.co/800x600/1f2937/dddddd?text=S23+3', 'https://placehold.co/800x600/1f2937/cccccc?text=S23+4'] },
+            { id: 12, name: 'iPhone 15', brand: 'Apple', price: '₹79,900', originalPrice: null, rating: 4.9, description: 'Features the Dynamic Island, A16 Bionic chip, and an advanced dual-camera system.', category: 'Gadgets', tag: null, mainImage: 'https://placehold.co/600x600/000000/ffffff?text=iPhone+15', galleryImages: ['https://placehold.co/800x600/000000/ffffff?text=iPhone+1', 'https://placehold.co/800x600/000000/eeeeee?text=iPhone+2', 'https://placehold.co/800x600/000000/dddddd?text=iPhone+3', 'https://placehold.co/800x600/000000/cccccc?text=iPhone+4'] },
+            { id: 13, name: 'Bluetooth Speaker', brand: 'Sony', price: '₹7,999', originalPrice: '₹8,999', rating: 4.2, description: 'Extra Bass portable wireless speaker with 12-hour battery life and IP67 rating.', category: 'Gadgets', tag: null, mainImage: 'https://i.postimg.cc/cCXyL0vF/0eff0afa-4df7-4cc6-8db8-3d89e4e4f210-739169e90f698abb173f3dd03dce2437-1276145015.jpg', galleryImages: ['https://i.postimg.cc/cCXyL0vF/0eff0afa-4df7-4cc6-8db8-3d89e4e4f210-739169e90f698abb173f3dd03dce2437-1276145015.jpg', 'https://placehold.co/800x600/3b82f6/eeeeee?text=Speaker+Side', 'https://placehold.co/800x600/3b82f6/dddddd?text=Speaker+Top', 'https://placehold.co/800x600/3b82f6/cccccc?text=Speaker+Back'] },
+            { id: 14, name: 'Smartwatch', brand: 'Amazfit', price: '₹5,999', originalPrice: '₹6,500', rating: 4.1, description: 'Fitness watch with heart rate monitor, SpO2 sensor, GPS, and long battery life.', category: 'Gadgets', tag: null, mainImage: 'https://placehold.co/600x600/3b82f6/ffffff?text=Watch', galleryImages: ['https://placehold.co/800x600/3b82f6/ffffff?text=Watch+Face', 'https://placehold.co/800x600/3b82f6/eeeeee?text=Watch+Side', 'https://placehold.co/800x600/3b82f6/dddddd?text=Watch+Strap', 'https://placehold.co/800x600/3b82f6/cccccc?text=Watch+Sensors'] },
+            
+            // COMPUTERS & ACCESSORIES
+            { id: 15, name: 'Dell Gaming Laptop', brand: 'Dell', price: '₹72,000', originalPrice: '₹80,000', rating: 4.9, description: '15.6" FHD 120Hz display with NVIDIA RTX 3050 graphics for immersive gaming.', category: 'Computers', tag: 'Best Seller', mainImage: 'https://i.postimg.cc/8PXg8kQz/73804961-253632609.jpg', galleryImages: ['https://i.postimg.cc/8PXg8kQz/73804961-253632609.jpg', 'https://placehold.co/800x600/3b82f6/eeeeee?text=Laptop+Keyboard', 'https://placehold.co/800x600/3b82f6/dddddd?text=Laptop+Side', 'https://placehold.co/800x600/3b82f6/cccccc?text=Laptop+Ports'] },
+            { id: 16, name: 'HP Pavilion Laptop', brand: 'HP', price: '₹58,000', originalPrice: null, rating: 4.5, description: '14-inch micro-edge display, Intel Core i5, perfect for work and entertainment.', category: 'Computers', tag: null, mainImage: 'https://placehold.co/600x600/1f2937/ffffff?text=HP+Laptop', galleryImages: ['https://placehold.co/800x600/1f2937/ffffff?text=HP+1', 'https://placehold.co/800x600/1f2937/eeeeee?text=HP+2', 'https://placehold.co/800x600/1f2937/dddddd?text=HP+3', 'https://placehold.co/800x600/1f2937/cccccc?text=HP+4'] },
+            { id: 17, name: 'MacBook Air', brand: 'Apple', price: '₹92,000', originalPrice: null, rating: 4.9, description: 'Supercharged by the M2 chip, with a stunning Liquid Retina display and all-day battery.', category: 'Computers', tag: 'Premium', mainImage: 'https://placehold.co/600x600/000000/ffffff?text=MacBook', galleryImages: ['https://placehold.co/800x600/000000/ffffff?text=MacBook+1', 'https://placehold.co/800x600/000000/eeeeee?text=MacBook+2', 'https://placehold.co/800x600/000000/dddddd?text=MacBook+3', 'https://placehold.co/800x600/000000/cccccc?text=MacBook+4'] },
+            { id: 18, name: 'Wireless Printer', brand: 'HP', price: '₹12,200', originalPrice: null, rating: 4.5, description: 'Smart Tank All-in-one printer with WiFi for easy printing from any device.', category: 'Computers', tag: null, mainImage: 'https://placehold.co/600x600/3b82f6/ffffff?text=Printer', galleryImages: ['https://placehold.co/800x600/3b82f6/ffffff?text=Printer+Front', 'https://placehold.co/800x600/3b82f6/eeeeee?text=Printer+Scanner', 'https://placehold.co/800x600/3b82f6/dddddd?text=Printer+Tray', 'https://placehold.co/800x600/3b82f6/cccccc?text=Printer+Inks'] },
+
+            // SECURITY
+            { id: 19, name: 'CCTV Camera', brand: 'CP Plus', price: '₹2,500', originalPrice: '₹3,000', rating: 4.9, description: 'Full HD dome camera with night vision and motion detection for home security.', category: 'Security', tag: 'Best Seller', mainImage: 'https://placehold.co/600x600/3b82f6/ffffff?text=CCTV', galleryImages: ['https://placehold.co/800x600/3b82f6/ffffff?text=Camera+Front', 'https://placehold.co/800x600/3b82f6/eeeeee?text=Camera+Side', 'https://placehold.co/800x600/3b82f6/dddddd?text=Camera+Lens', 'https://placehold.co/800x600/3b82f6/cccccc?text=Camera+Mount'] },
+            { id: 20, name: 'Video Doorbell', brand: 'Qubo', price: '₹4,999', originalPrice: null, rating: 4.3, description: 'Smart WiFi video doorbell with 2-way talk, intruder alarm, and night vision.', category: 'Security', tag: 'New Arrival', mainImage: 'https://placehold.co/600x600/3b82f6/ffffff?text=Doorbell', galleryImages: ['https://placehold.co/800x600/3b82f6/ffffff?text=Doorbell+1', 'https://placehold.co/800x600/3b82f6/eeeeee?text=Doorbell+2', 'https://placehold.co/800x600/3b82f6/dddddd?text=Doorbell+3', 'https://placehold.co/800x600/3b82f6/cccccc?text=Doorbell+4'] }
         ];
 
         const productGrid = document.getElementById('product-grid');
@@ -325,8 +266,21 @@
         const loadMoreBtn = document.getElementById('load-more-btn');
         let currentFilter = 'All';
         let itemsToShow = 8;
+        
+        const generateStars = (rating) => {
+            let stars = '';
+            for (let i = 1; i <= 5; i++) {
+                if (i <= rating) {
+                    stars += '<svg fill="currentColor" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>';
+                } else if (i - 0.5 <= rating) {
+                    stars += '<svg fill="currentColor" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" clip-path="url(#half)"/><defs><clipPath id="half"><rect x="0" y="0" width="10" height="20"/></clipPath></defs></svg>';
+                } else {
+                    stars += '<svg class="text-gray-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>';
+                }
+            }
+            return `<div class="stars">${stars}</div>`;
+        };
 
-        // --- Core Logic ---
         const renderProducts = () => {
             const searchTerm = searchInput.value.toLowerCase();
             const filteredProducts = allProducts.filter(product => {
@@ -342,17 +296,31 @@
             const productsToRender = filteredProducts.slice(0, itemsToShow);
             
             if (productsToRender.length === 0) {
-                 productGrid.innerHTML = `<p class="text-center col-span-full text-gray-500">No products found matching your criteria.</p>`;
+                 productGrid.innerHTML = `<p class="text-center col-span-full text-gray-500 text-lg">No products found matching your criteria.</p>`;
             } else {
                 productsToRender.forEach(product => {
+                    const priceHTML = product.originalPrice 
+                        ? `<div class="flex items-end justify-center gap-2">
+                               <p class="text-2xl font-bold text-red-600">${product.price}</p>
+                               <p class="text-md text-gray-500 line-through">${product.originalPrice}</p>
+                           </div>` 
+                        : `<p class="text-2xl font-bold text-blue-600">${product.price}</p>`;
+                    
+                    const tagHTML = product.tag ? `<div class="product-tag">${product.tag}</div>` : '';
+
                     productGrid.innerHTML += `
-                        <div class="product-item bg-white rounded-lg shadow-lg overflow-hidden product-card text-center">
-                            <img src="${product.mainImage}" alt="${product.name}" class="w-full h-56 object-cover gallery-trigger" data-images="${product.galleryImages.join(',')}" loading="lazy">
-                            <div class="p-6">
-                                <h4 class="text-xl font-bold">${product.name}</h4>
+                        <div class="product-item flex flex-col bg-white rounded-lg shadow-lg overflow-hidden product-card">
+                            <div class="relative">
+                                <img src="${product.mainImage}" alt="${product.name}" class="w-full h-56 object-cover gallery-trigger" data-images="${product.galleryImages.join(',')}" loading="lazy">
+                                ${tagHTML}
+                            </div>
+                            <div class="p-6 flex flex-col flex-grow">
+                                <h4 class="text-lg font-bold">${product.name}</h4>
                                 <p class="text-sm text-gray-500">by ${product.brand}</p>
-                                <p class="text-gray-600 text-sm mt-2 h-10 overflow-hidden">${product.description}</p>
-                                <p class="text-2xl font-bold text-blue-600 mt-4">${product.price}</p>
+                                <div class="my-2 flex justify-center">${generateStars(product.rating)}</div>
+                                <p class="text-gray-600 text-sm mt-2 flex-grow">${product.description}</p>
+                                <div class="mt-4">${priceHTML}</div>
+                                <a href="#contact" class="mt-4 w-full bg-gray-800 text-white py-2 px-4 rounded-md hover:bg-black font-semibold transition">Enquire Now</a>
                             </div>
                         </div>
                     `;
@@ -370,30 +338,22 @@
 
             document.querySelectorAll('.category-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
-                    currentFilter = btn.dataset.category;
-                    itemsToShow = 8; // Reset item count on new filter
-                    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active', 'bg-blue-600', 'text-white'));
+                    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
+                    currentFilter = btn.dataset.category;
+                    itemsToShow = 8;
                     renderProducts();
                 });
             });
         };
 
-        // --- Initial Setup and Event Listeners ---
         setupCategories();
         renderProducts();
         
-        loadMoreBtn.addEventListener('click', () => {
-            itemsToShow += 8;
-            renderProducts();
-        });
-        
-        searchInput.addEventListener('keyup', () => {
-            itemsToShow = 8; // Reset item count on search
-            renderProducts();
-        });
+        loadMoreBtn.addEventListener('click', () => { itemsToShow += 8; renderProducts(); });
+        searchInput.addEventListener('keyup', () => { itemsToShow = 8; renderProducts(); });
 
-        // --- Other Page Logic (Header, FAQ, Modals etc.) ---
+        // --- Other Page Logic ---
         const header = document.getElementById('header');
         if (header) window.addEventListener('scroll', () => header.classList.toggle('header-scrolled', window.scrollY > 50));
         
@@ -415,105 +375,99 @@
             backToTopButton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
         }
         
-        const faqItems = document.querySelectorAll('.faq-item');
-        faqItems.forEach(item => {
-            const question = item.querySelector('.faq-question');
-            if(question) {
-                question.addEventListener('click', () => {
-                    const answer = item.querySelector('.faq-answer');
-                    const icon = item.querySelector('.faq-icon');
-                    const isOpened = answer.style.maxHeight && answer.style.maxHeight !== '0px';
-                    faqItems.forEach(i => {
-                        i.querySelector('.faq-answer').style.maxHeight = '0px';
-                        i.querySelector('.faq-icon').style.transform = 'rotate(0deg)';
-                    });
-                    if (!isOpened) {
-                        answer.style.maxHeight = answer.scrollHeight + 'px';
-                        icon.style.transform = 'rotate(180deg)';
-                    }
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const icon = question.querySelector('.faq-icon');
+                const isOpened = answer.style.maxHeight && answer.style.maxHeight !== '0px';
+                
+                document.querySelectorAll('.faq-answer').forEach(ans => {
+                    ans.style.maxHeight = '0px';
+                    const prevIcon = ans.previousElementSibling.querySelector('.faq-icon');
+                    if(prevIcon) prevIcon.style.transform = 'rotate(0deg)';
                 });
-            }
+
+                if (!isOpened) {
+                    answer.style.maxHeight = answer.scrollHeight + 'px';
+                    if(icon) icon.style.transform = 'rotate(180deg)';
+                }
+            });
         });
 
-        // --- (Modal Logic remains largely the same, but needs to be triggered from dynamically created elements) ---
-        // Image Gallery Modal
         const imageModal = document.getElementById('image-modal');
         const modalImage = document.getElementById('modal-image');
         const imageModalCloseButton = document.getElementById('modal-close-button');
         const prevButton = document.getElementById('modal-prev-button');
         const nextButton = document.getElementById('modal-next-button');
-        let currentImageIndex = 0;
-        let currentImageSet = [];
+        let currentImageIndex = 0, currentImageSet = [];
 
         const updateModalImage = () => {
+            if(!modalImage) return;
             modalImage.src = currentImageSet[currentImageIndex];
             prevButton.style.display = currentImageIndex === 0 ? 'none' : 'block';
             nextButton.style.display = currentImageIndex === currentImageSet.length - 1 ? 'none' : 'block';
         };
 
-        // Event delegation for dynamically added product images
         document.body.addEventListener('click', function(e) {
-            if (e.target.classList.contains('gallery-trigger')) {
-                const imagesAttr = e.target.getAttribute('data-images');
-                currentImageSet = imagesAttr ? imagesAttr.split(',') : [e.target.src];
+            const target = e.target.closest('.gallery-trigger');
+            if (target) {
+                const imagesAttr = target.getAttribute('data-images');
+                currentImageSet = imagesAttr ? imagesAttr.split(',') : [target.src];
                 currentImageIndex = 0;
                 updateModalImage();
-                imageModal.classList.remove('hidden');
+                if(imageModal) imageModal.classList.remove('hidden');
             }
         });
 
-        if (prevButton) prevButton.addEventListener('click', () => { if (currentImageIndex > 0) { currentImageIndex--; updateModalImage(); } });
-        if (nextButton) nextButton.addEventListener('click', () => { if (currentImageIndex < currentImageSet.length - 1) { currentImageIndex++; updateModalImage(); } });
+        if(prevButton) prevButton.addEventListener('click', () => { if (currentImageIndex > 0) { currentImageIndex--; updateModalImage(); } });
+        if(nextButton) nextButton.addEventListener('click', () => { if (currentImageIndex < currentImageSet.length - 1) { currentImageIndex++; updateModalImage(); } });
         
-        const closeImageModal = () => imageModal.classList.add('hidden');
-        if (imageModalCloseButton) imageModalCloseButton.addEventListener('click', closeImageModal);
-        if (imageModal) imageModal.addEventListener('click', (e) => { if (e.target === imageModal) closeImageModal(); });
+        const closeImageModal = () => imageModal && imageModal.classList.add('hidden');
+        if(imageModalCloseButton) imageModalCloseButton.addEventListener('click', closeImageModal);
+        if(imageModal) imageModal.addEventListener('click', (e) => { if (e.target === imageModal) closeImageModal(); });
 
-        // Gemini AI Modal
         const geminiModal = document.getElementById('gemini-modal');
-        const geminiModalCloseButton = document.getElementById('gemini-modal-close');
-        const geminiModalTitle = document.getElementById('gemini-modal-title');
-        const geminiModalPrompt = document.getElementById('gemini-modal-prompt');
-        const geminiUserInput = document.getElementById('gemini-user-input');
-        const geminiSubmitButton = document.getElementById('gemini-submit-button');
-        const geminiLoading = document.getElementById('gemini-loading');
-        const geminiResult = document.getElementById('gemini-result');
-        let currentSystemPrompt = "";
+        if(geminiModal) {
+            const geminiModalCloseButton = document.getElementById('gemini-modal-close');
+            const geminiModalTitle = document.getElementById('gemini-modal-title');
+            const geminiModalPrompt = document.getElementById('gemini-modal-prompt');
+            const geminiUserInput = document.getElementById('gemini-user-input');
+            const geminiSubmitButton = document.getElementById('gemini-submit-button');
+            const geminiLoading = document.getElementById('gemini-loading');
+            const geminiResult = document.getElementById('gemini-result');
+            let currentSystemPrompt = "";
 
-        const openModal = (title, prompt, placeholder, systemPrompt) => {
-             if (!geminiModal) return;
-            geminiModalTitle.textContent = title;
-            geminiModalPrompt.textContent = prompt;
-            geminiUserInput.placeholder = placeholder;
-            currentSystemPrompt = systemPrompt;
-            geminiResult.innerHTML = "";
-            geminiUserInput.value = "";
-            geminiLoading.classList.add('hidden');
-            geminiSubmitButton.classList.remove('hidden');
-            geminiModal.classList.remove('hidden');
-        };
+            const openModal = (title, prompt, placeholder, systemPrompt) => {
+                geminiModalTitle.textContent = title;
+                geminiModalPrompt.textContent = prompt;
+                geminiUserInput.placeholder = placeholder;
+                currentSystemPrompt = systemPrompt;
+                geminiResult.innerHTML = "";
+                geminiUserInput.value = "";
+                geminiLoading.classList.add('hidden');
+                geminiSubmitButton.classList.remove('hidden');
+                geminiModal.classList.remove('hidden');
+            };
 
-        document.getElementById('open-electronics-ai')?.addEventListener('click', () => { openModal('Electronics Advisor ✨', 'Need help choosing?', 'e.g., "best TV for gaming under ₹40,000?"', 'You are an expert electronics sales assistant...'); });
-        document.getElementById('open-hardware-ai')?.addEventListener('click', () => { openModal('Hardware Project Estimator ✨', 'Describe your project for a material estimate.', 'e.g., "building a 10x12 foot concrete slab"', 'You are a helpful construction project estimator...'); });
-        document.getElementById('open-events-ai')?.addEventListener('click', () => { openModal('Event Planner AI ✨', 'Describe your event for creative ideas!', 'e.g., "a traditional wedding for 200 guests"', 'You are a creative event planner...'); });
-        
-        if (geminiModalCloseButton) geminiModalCloseButton.addEventListener('click', () => geminiModal.classList.add('hidden'));
-        if (geminiModal) geminiModal.addEventListener('click', (e) => { if (e.target === geminiModal) geminiModal.classList.add('hidden'); });
+            document.getElementById('open-electronics-ai')?.addEventListener('click', () => openModal('Electronics Advisor ✨', 'Need help choosing?', 'e.g., "best TV for gaming under ₹40,000?"', 'You are an expert electronics sales assistant...'));
+            document.getElementById('open-hardware-ai')?.addEventListener('click', () => openModal('Hardware Project Estimator ✨', 'Describe your project for a material estimate.', 'e.g., "building a 10x12 foot concrete slab"', 'You are a helpful construction project estimator...'));
+            document.getElementById('open-events-ai')?.addEventListener('click', () => openModal('Event Planner AI ✨', 'Describe your event for creative ideas!', 'e.g., "a traditional wedding for 200 guests"', 'You are a creative event planner...'));
+            
+            geminiModalCloseButton.addEventListener('click', () => geminiModal.classList.add('hidden'));
+            geminiModal.addEventListener('click', (e) => { if (e.target === geminiModal) geminiModal.classList.add('hidden'); });
 
-        const callGeminiAPI = async (userQuery, systemPrompt) => {
-            const apiKey = "YOUR_GEMINI_API_KEY_HERE"; // IMPORTANT: Replace with your actual key
-            if (apiKey === "YOUR_GEMINI_API_KEY_HERE") { return "API Key not configured. Please add your Gemini API key in the script section of the HTML file."; }
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-            const payload = { contents: [{ parts: [{ text: userQuery }] }], systemInstruction: { parts: [{ text: systemPrompt }] }, };
-            try {
-                const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-                const result = await response.json();
-                return result.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, I couldn't generate a response.";
-            } catch (error) { console.error("API call failed:", error); return "Error connecting to the AI service. Please try again later."; }
-        };
+            const callGeminiAPI = async (userQuery, systemPrompt) => {
+                const apiKey = "YOUR_GEMINI_API_KEY_HERE";
+                if (apiKey === "YOUR_GEMINI_API_KEY_HERE") return "API Key not configured. Please add your Gemini API key in the script section of the HTML file.";
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+                try {
+                    const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ contents: [{ parts: [{ text: userQuery }] }], systemInstruction: { parts: [{ text: systemPrompt }] } }) });
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    const result = await response.json();
+                    return result.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, I couldn't generate a response.";
+                } catch (error) { console.error("API call failed:", error); return "Error connecting to the AI service. Please try again later."; }
+            };
 
-        if (geminiSubmitButton) {
             geminiSubmitButton.addEventListener('click', async () => {
                 const userInput = geminiUserInput.value.trim();
                 if (!userInput) { geminiResult.textContent = "Please enter a description or question."; return; }
