@@ -457,8 +457,12 @@
             geminiModal.addEventListener('click', (e) => { if (e.target === geminiModal) geminiModal.classList.add('hidden'); });
 
             const callGeminiAPI = async (userQuery, systemPrompt) => {
-                const apiKey = "AIzaSyAZN8BTUL32GjFfbbmADB1s9X3tMLzOK64";
-                if (apiKey === "AIzaSyAZN8BTUL32GjFfbbmADB1s9X3tMLzOK64") return "API Key not configured. Please add your Gemini API key in the script section of the HTML file.";
+                const callGeminiAPI = async (userQuery, systemPrompt) => {
+    const apiKey = "AIzaSyAZN8BTUL32GjFfbbmADB1s9X3tMLzOK64"; // You will have your key here
+    // THIS IS THE CORRECTED LINE
+    if (apiKey === "YOUR_GEMINI_API_KEY_HERE") return "API Key not configured...";
+    // ... rest of the function
+};
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
                 try {
                     const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ contents: [{ parts: [{ text: userQuery }] }], systemInstruction: { parts: [{ text: systemPrompt }] } }) });
